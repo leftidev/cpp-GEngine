@@ -1,11 +1,5 @@
 /*
-    This is a basic platformer framework.
-
-    - Player can run and jump
-    - Level data(tile map) reading from file
-    - Collisions with tiles
-    - Camera follows the player
-    - Gravity pulls down
+	GEngine demo-platformer project. Under development.
 */
 
 #include <algorithm>
@@ -13,9 +7,14 @@
 
 #include <SDL/SDL.h>
 
+/*
+These were included in GEngine...
+
 #include <cpp-GEngine/GEngine.h>
 #include <cpp-GEngine/Timing.h>
 #include <cpp-GEngine/Errors.h>
+*/
+
 
 #include "MainGame.h"
 
@@ -46,24 +45,27 @@ void MainGame::run() {
 }
 
 void MainGame::initSystems() {
-    // Initialize the game engine
-    GEngine::init();
+	/*
+	These were included in GEngine...
 
-    // Create our window
-    _window.create("ARPG Experiment?", _screenWidth, _screenHeight, 0);
+	// Initialize the game engine
+	GEngine::init();
 
-    // Black background color
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// Create our window
+	_window.create("ARPG Experiment?", _screenWidth, _screenHeight, 0);
 
-    // Set up the shaders
-    initShaders();
+	// Black background color
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    // Initialize our sprite batch
-    _firstSpriteBatch.init();
+	// Set up the shaders
+	initShaders();
 
-    // Set up the camera
-    _camera.init(_screenWidth, _screenHeight);
+	// Initialize our sprite batch
+	_firstSpriteBatch.init();
 
+	// Set up the camera
+	_camera.init(_screenWidth, _screenHeight);
+	*/
 }
 
 void MainGame::initLevel() {
@@ -73,16 +75,27 @@ void MainGame::initLevel() {
 
     // Initialize the player.
     _player = new Player();
-    _player->init(_levels[_currentLevel]->getStartPlayerPos(), &_inputManager, &_camera);
+
+	/*
+	These were included in GEngine...
+
+	_player->init(_levels[_currentLevel]->getStartPlayerPos(), &_inputManager, &_camera);
+	*/
+
 }
 
 void MainGame::initShaders() {
     // Compile the color shader.
-    _textureProgram.compileShaders("Shaders/textureShading.vert", "Shaders/textureShading.frag");
-    _textureProgram.addAttribute("vertexPosition");
-    _textureProgram.addAttribute("vertexColor");
-    _textureProgram.addAttribute("vertexUV");
-    _textureProgram.linkShaders();
+	/*
+	These were included in GEngine...
+
+	_textureProgram.compileShaders("../assets/shaders/textureShading.vert", "../assets/shaders/textureShading.frag");
+	_textureProgram.addAttribute("vertexPosition");
+	_textureProgram.addAttribute("vertexColor");
+	_textureProgram.addAttribute("vertexUV");
+	_textureProgram.linkShaders();
+	*/
+
 }
 
 void MainGame::gameLoop() {
@@ -93,20 +106,30 @@ void MainGame::gameLoop() {
     const float DESIRED_FRAMETIME = MS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
     const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
 
-    // Used to cap the FPS
-    GEngine::FpsLimiter fpsLimiter;
-    fpsLimiter.setMaxFPS(3000000.0f);
+	/*
+	These were included in GEngine...
 
-    // Zoom out the camera by 2x
-    const float CAMERA_SCALE = 1.0f / 2.0f;
-    _camera.setScale(CAMERA_SCALE);
+	// Used to cap the FPS
+	GEngine::FpsLimiter fpsLimiter;
+	fpsLimiter.setMaxFPS(3000000.0f);
+
+	// Zoom out the camera by 2x
+	const float CAMERA_SCALE = 1.0f / 2.0f;
+	_camera.setScale(CAMERA_SCALE);
+	*/
+
 
     // Start our previousTicks variable
     float previousTicks = SDL_GetTicks();
 
     // Main loop
     while (_gameState == GameState::PLAY) {
-        fpsLimiter.beginFrame();
+		/*
+		These were included in GEngine...
+
+		fpsLimiter.beginFrame();
+		*/
+
 
         // Calculate the frameTime in milliseconds
         float newTicks = SDL_GetTicks();
@@ -115,7 +138,12 @@ void MainGame::gameLoop() {
         // Get the total delta time
         float totalDeltaTime = frameTime / DESIRED_FRAMETIME;
 
-        _inputManager.update();
+		/*
+		These were included in GEngine...
+
+		_inputManager.update();
+		*/
+
 
         processInput();
 
@@ -133,14 +161,24 @@ void MainGame::gameLoop() {
         }
 
         // Make sure the camera is bound to the player position
-        _camera.setPosition(_player->getPosition());
-        _camera.update();
+		/*
+		These were included in GEngine...
+
+		_camera.setPosition(_player->getPosition());
+		_camera.update();
+		*/
+
 
         drawGame();
 
         // End the frame, limit the FPS, and get the current FPS.
-        _fps = fpsLimiter.endFrame();
-        std::cout << _fps << std::endl;
+		/*
+		These were included in GEngine...
+
+		_fps = fpsLimiter.endFrame();
+		std::cout << _fps << std::endl;
+		*/
+
     }
 }
 
@@ -151,70 +189,79 @@ void MainGame::processInput() {
         switch (evnt.type) {
         case SDL_QUIT:
             _gameState = GameState::EXIT;
-            GEngine::fatalError("oops");
-        case SDL_MOUSEMOTION:
-            _inputManager.setMouseCoords(float(evnt.motion.x), float(evnt.motion.y));
-            break;
-        case SDL_KEYDOWN:
-            _inputManager.pressKey(evnt.key.keysym.sym);
-            break;
-        case SDL_KEYUP:
-            _inputManager.releaseKey(evnt.key.keysym.sym);
-            break;
-        case SDL_MOUSEBUTTONDOWN:
-            _inputManager.pressKey(evnt.button.button);
-            break;
-        case SDL_MOUSEBUTTONUP:
-            _inputManager.releaseKey(evnt.button.button);
-            break;
+			/*
+			These were included in GEngine...
+
+			GEngine::fatalError("oops");
+		case SDL_MOUSEMOTION:
+
+			_inputManager.setMouseCoords(float(evnt.motion.x), float(evnt.motion.y));
+			break;
+		case SDL_KEYDOWN:
+			_inputManager.pressKey(evnt.key.keysym.sym);
+			break;
+		case SDL_KEYUP:
+			_inputManager.releaseKey(evnt.key.keysym.sym);
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			_inputManager.pressKey(evnt.button.button);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			_inputManager.releaseKey(evnt.button.button);
+			break;
+			*/
+
         }
     }
 }
+/*
+These were included in GEngine...
 
 void MainGame::drawGame() {
-    // Set the base depth to 1.0
-    glClearDepth(1.0);
-    // Clear the color and depth buffer
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+// Set the base depth to 1.0
+glClearDepth(1.0);
+// Clear the color and depth buffer
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    _textureProgram.use();
+_textureProgram.use();
 
-    // Draw code goes here
-    glActiveTexture(GL_TEXTURE0);
+// Draw code goes here
+glActiveTexture(GL_TEXTURE0);
 
-    // Make sure the shader uses texture 0
-    GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
-    glUniform1i(textureUniform, 0);
+// Make sure the shader uses texture 0
+GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
+glUniform1i(textureUniform, 0);
 
-    // Grab the camera matrix
-    glm::mat4 projectionMatrix = _camera.getCameraMatrix();
-    GLint pUniform = _textureProgram.getUniformLocation("P");
-    glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+// Grab the camera matrix
+glm::mat4 projectionMatrix = _camera.getCameraMatrix();
+GLint pUniform = _textureProgram.getUniformLocation("P");
+glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-    const glm::vec2 tileDimensions(_levels[_currentLevel]->_tiles[0]->width);
+const glm::vec2 tileDimensions(_levels[_currentLevel]->_tiles[0]->width);
 
-    // Begin drawing.
-    _firstSpriteBatch.begin();
+// Begin drawing.
+_firstSpriteBatch.begin();
 
-    // Draw tiles with camera culling.
-    for (int i = 0; i < _levels[_currentLevel]->_tiles.size(); i++) {
-        if (_camera.isBoxInView(_levels[_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
-            _levels[_currentLevel]->_tiles[i]->draw(_firstSpriteBatch);
-        }
-    }
-
-    // Draw player.
-    _player->draw(_firstSpriteBatch);
-
-    // End sprite batch creation
-    _firstSpriteBatch.end();
-
-    // Render to the screen
-    _firstSpriteBatch.renderBatch();
-
-    // Unbind the program
-    _textureProgram.unuse();
-
-    // Swap our buffer and draw everything to the screen!
-    _window.swapBuffer();
+// Draw tiles with camera culling.
+for (int i = 0; i < _levels[_currentLevel]->_tiles.size(); i++) {
+if (_camera.isBoxInView(_levels[_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
+_levels[_currentLevel]->_tiles[i]->draw(_firstSpriteBatch);
 }
+}
+
+// Draw player.
+_player->draw(_firstSpriteBatch);
+
+// End sprite batch creation
+_firstSpriteBatch.end();
+
+// Render to the screen
+_firstSpriteBatch.renderBatch();
+
+// Unbind the program
+_textureProgram.unuse();
+
+// Swap our buffer and draw everything to the screen!
+_window.swapBuffer();
+}
+*/

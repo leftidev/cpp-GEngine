@@ -1,10 +1,14 @@
 #pragma once
 
+/*
+These were included in GEngine...
+
 #include <cpp-GEngine/Window.h>
 #include <cpp-GEngine/GLSLProgram.h>
 #include <cpp-GEngine/Camera2D.h>
 #include <cpp-GEngine/InputManager.h>
 #include <cpp-GEngine/SpriteBatch.h>
+*/
 
 #include "Player.h"
 #include "Tile.h"
@@ -43,15 +47,20 @@ private:
     void drawGame();
 
     /// Member Variables
-    GEngine::Window _window; ///< The game window
+	/*
+	These were included in GEngine...
 
-    GEngine::GLSLProgram _textureProgram; ///< The shader program
+	GEngine::Window _window; // The game window
 
-    GEngine::InputManager _inputManager; ///< Handles input
+	GEngine::GLSLProgram _textureProgram; // The shader program
 
-    GEngine::Camera2D _camera; ///< Main Camera
+	GEngine::InputManager _inputManager; // Handles input
 
-    GEngine::SpriteBatch _firstSpriteBatch; ///< Draws all agents
+	GEngine::Camera2D _camera; // Main Camera
+
+	GEngine::SpriteBatch _firstSpriteBatch; // Draws all agents
+	*/
+
 
     std::vector<Level*> _levels; ///< vector of all levels
 
