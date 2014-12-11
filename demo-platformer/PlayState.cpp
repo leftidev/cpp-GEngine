@@ -1,9 +1,13 @@
 #include <iostream>
 
+#include <SDL/SDL.h>
+#include <GL/glew.h>
+
 #include "PlayState.h"
+#include <cpp-GEngine/Window.h>
 
 
-PlayState::PlayState(StateMachine& stateMachine) : GameState(stateMachine) {
+PlayState::PlayState(StateMachine& stateMachine, Window& window) : GameState(stateMachine, window) {
 }
 
 
@@ -49,4 +53,11 @@ void PlayState::update() {
 
 void PlayState::draw() {
 	std::cout << ">> PlayState draw" << std::endl;
+	// Set the base depth to 1.0
+	glClearDepth(1.0);
+	// Clear the color and depth buffer
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Swap our buffer and draw everything to the screen!
+	_window.swapBuffer();
 }

@@ -1,9 +1,10 @@
+#include "StateMachine.h"
 #include "GameState.h"
 
-#include "StateMachine.h"
 
-
-GameState::GameState(StateMachine& stateMachine) : _stateMachine(stateMachine) {
+GameState::GameState(StateMachine& stateMachine, Window& window) : 
+	_stateMachine(stateMachine),
+	_window(window) {
 }
 
 

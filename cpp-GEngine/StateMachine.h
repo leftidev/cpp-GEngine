@@ -4,7 +4,6 @@
 
 #include "GameState.h"
 
-
 class StateMachine
 {
 public:

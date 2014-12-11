@@ -6,7 +6,7 @@ class StateMachine;
 
 class PlayState : public GameState {
 public:
-	PlayState(StateMachine& stateMachine);
+	PlayState(StateMachine& stateMachine, Window& window);
 	~PlayState();
 	void init() override;
 	void initShaders();
@@ -14,6 +14,5 @@ public:
 	void processEvents() override;
 	void update() override;
 	void draw() override;
-
 };
 

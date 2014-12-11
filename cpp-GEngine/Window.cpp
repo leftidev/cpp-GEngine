@@ -1,7 +1,6 @@
 #include "Window.h"
 #include "Errors.h"
 
-namespace GEngine {
 
 Window::Window()
 {
@@ -32,21 +31,21 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 	_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);
 	if (_sdlWindow == nullptr)
 	{
-		fatalError("SDL Window could not be created!");
+		GEngine::fatalError("SDL Window could not be created!");
 	}
 
 	// Set up OpenGL context
 	SDL_GLContext glContext = SDL_GL_CreateContext(_sdlWindow);
 	if (glContext == nullptr)
 	{
-		fatalError("SDL_GL Context could not be created!");
+		GEngine::fatalError("SDL_GL Context could not be created!");
 	}
 
 	// Set up GLEW
 	GLenum error = glewInit();
 	if (error != GLEW_OK)
 	{
-		fatalError("Could not initialize glew!");
+		GEngine::fatalError("Could not initialize glew!");
 	}
 
 	// Check the OpenGL version
@@ -69,6 +68,4 @@ void Window::swapBuffer()
 {
 	// Swap the buffers.
 	SDL_GL_SwapWindow(_sdlWindow);
-}
-
 }
