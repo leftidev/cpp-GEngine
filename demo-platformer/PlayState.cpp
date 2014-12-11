@@ -22,7 +22,7 @@ void PlayState::init() {
 	initShaders();
 
 	// Initialize our sprite batch
-	//_mainSpriteBatch.init();
+	_spriteBatch.init();
 
 	// Set up the camera
 	//_camera.init(_screenWidth, _screenHeight);
@@ -91,6 +91,36 @@ void PlayState::draw() {
 	glClearDepth(1.0);
 	// Clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//_textureProgram.use();
+
+	// Draw code goes here
+	glActiveTexture(GL_TEXTURE0);
+
+	// Make sure the shader uses texture 0
+	//GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
+	//glUniform1i(textureUniform, 0);
+
+	// Grab the camera matrix
+	//glm::mat4 projectionMatrix = _camera.getCameraMatrix();
+	//GLint pUniform = _textureProgram.getUniformLocation("P");
+	//glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+
+	// Begin drawing
+	_spriteBatch.begin();
+
+	// Draw everything...
+	// Draw everything...
+	// Draw everything...
+
+	// End sprite batch creation
+	_spriteBatch.end();
+
+	// Render to the screen
+	_spriteBatch.renderBatch();
+
+	// Unbind the program
+	//_textureProgram.unuse();
 
 	// Swap our buffer and draw everything to the screen!
 	_window.swapBuffer();
