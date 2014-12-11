@@ -11,6 +11,7 @@
 #include <cpp-GEngine/GameState.h>
 #include <cpp-GEngine/GEngine.h>
 #include <cpp-GEngine/Window.h>
+#include <cpp-GEngine/Timing.h>
 
 #include "PlayState.h"
 
@@ -23,18 +24,22 @@ int main(int argc, char** argv) {
 	GEngine::init();
 
 	// Create the window
-	Window window;
+	GEngine::Window window;
 	window.create("demo-platformer", SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
 	// Set black background color
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Initialize the InputManager
-	InputManager inputManager;
+	GEngine::InputManager inputManager;
 
 	// Initialize the StateMachine
-    StateMachine stateMachine;
+    GEngine::StateMachine stateMachine;
 	stateMachine.changeState(new PlayState(stateMachine, window, inputManager));
+
+	// Used to cap the FPS
+	GEngine::FpsLimiter fpsLimiter;
+	fpsLimiter.setMaxFPS(3000000.0f);
 
 	// Some helpful constants for semi-fixed timestep
 	const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at

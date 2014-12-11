@@ -5,6 +5,7 @@
 
 
 namespace GEngine {
+
 TextureCache::TextureCache() {
 }
 

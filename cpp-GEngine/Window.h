@@ -5,6 +5,7 @@
 
 #include <string>
 
+namespace GEngine {
 
 enum WindowFlags {
 	INVISIBLE = 0x1,
@@ -28,3 +29,5 @@ private:
 	SDL_Window* _sdlWindow;
 	int _screenWidth, _screenHeight;
 };
+
+}

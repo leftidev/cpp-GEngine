@@ -1,5 +1,8 @@
 #include "InputManager.h"
 
+
+namespace GEngine {
+
 InputManager::InputManager() : _mouseCoords(0.0f) {
 }
 
@@ -53,4 +56,6 @@ bool InputManager::wasKeyDown(unsigned int keyID) {
 	else {
 		return false;
 	}
+}
+
 }

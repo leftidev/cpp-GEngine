@@ -13,7 +13,7 @@ Player::~Player() {
     // Empty
 }
 
-void Player::init(glm::fvec2 pos, InputManager* inputManager, GEngine::Camera2D* camera) {
+void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera) {
     textureID = GEngine::ResourceManager::getTexture("../assets/textures/gizmo_52x52.png").id;
 
 	std::cout << "Player- textureID: " << textureID << std::endl;

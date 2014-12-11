@@ -12,9 +12,9 @@
 
 class StateMachine;
 
-class PlayState : public GameState {
+class PlayState : public GEngine::GameState {
 public:
-	PlayState(StateMachine& stateMachine, Window& window, InputManager& inputManager);
+	PlayState(GEngine::StateMachine& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager);
 	~PlayState();
 	void init() override;
 	void initShaders();

@@ -1,6 +1,8 @@
 #include "StateMachine.h"
 
 
+namespace GEngine {
+
 StateMachine::StateMachine() {
 	// Empty
 }
@@ -42,4 +44,6 @@ void StateMachine::processEvents() {
 
 void StateMachine::draw() {
 	_gameStates.back()->draw();
+}
+
 }

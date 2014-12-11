@@ -9,7 +9,7 @@
 #include "PlayState.h"
 
 
-PlayState::PlayState(StateMachine& stateMachine, Window& window, InputManager& inputManager) : 
+PlayState::PlayState(GEngine::StateMachine& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager) :
 	GameState(stateMachine, window, inputManager),
 	_fps(0),
 	_player(nullptr) {

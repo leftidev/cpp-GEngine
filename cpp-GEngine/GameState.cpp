@@ -2,8 +2,9 @@
 #include "StateMachine.h"
 #include "GameState.h"
 
+namespace GEngine {
 
-GameState::GameState(StateMachine& stateMachine, Window& window, InputManager& inputManager) :
+GameState::GameState(GEngine::StateMachine& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager) :
 	_stateMachine(stateMachine),
 	_window(window),
 	_inputManager(inputManager) {
@@ -18,4 +19,6 @@ void GameState::updateInputManager() {
 
 void GameState::changeState(StateMachine& machine, GameState* state) {
 	machine.changeState(state);
+}
+
 }

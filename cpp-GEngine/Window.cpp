@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "Errors.h"
 
+namespace GEngine {
 
 Window::Window() {
 }
@@ -58,4 +59,6 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 void Window::swapBuffer() {
 	// Swap the buffers.
 	SDL_GL_SwapWindow(_sdlWindow);
+}
+
 }

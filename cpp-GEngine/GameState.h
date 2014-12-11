@@ -2,10 +2,15 @@
 
 #include "Camera2D.h"
 
+namespace GEngine {
 
 class StateMachine;
 class Window;
 class InputManager;
+
+}
+
+namespace GEngine {
 
 class GameState {
 public:
@@ -26,3 +31,5 @@ protected:
 	GEngine::Camera2D _camera; // main Camera
 
 };
+
+}

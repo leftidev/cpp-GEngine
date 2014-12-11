@@ -5,6 +5,8 @@
 #include "GameState.h"
 
 
+namespace GEngine {
+
 class StateMachine {
 public:
 	StateMachine();
@@ -29,3 +31,5 @@ private:
 	std::vector<GameState*> _gameStates;
 	bool _running;
 };
+
+}

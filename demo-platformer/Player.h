@@ -12,7 +12,7 @@ public:
     Player();
     ~Player();
 
-    void init(glm::fvec2 pos, InputManager* inputManager, GEngine::Camera2D* camera);
+	void init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera);
     void update(std::vector<Tile*> tiles, float deltaTime);
     void jump();
     void collide(glm::fvec2(speed), std::vector<Tile*> tiles);
@@ -22,7 +22,7 @@ public:
     bool jumped = false;
 
 private:
-    InputManager* _inputManager;
+	GEngine::InputManager* _inputManager;
 	GEngine::Camera2D* _camera;
 };
 
