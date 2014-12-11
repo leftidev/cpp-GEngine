@@ -31,14 +31,12 @@ void PlayState::init() {
 }
 
 void PlayState::initShaders() {
-	/*
 	// Compile the color shader.
-	_textureProgram.compileShaders("Shaders/textureShading.vert", "Shaders/textureShading.frag");
+	_textureProgram.compileShaders("../assets/shaders/textureShading.vert", "../assets/shaders/textureShading.frag");
 	_textureProgram.addAttribute("vertexPosition");
 	_textureProgram.addAttribute("vertexColor");
 	_textureProgram.addAttribute("vertexUV");
 	_textureProgram.linkShaders();
-	*/
 }
 
 void PlayState::initLevel() {
@@ -92,14 +90,15 @@ void PlayState::draw() {
 	// Clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//_textureProgram.use();
+	// Enable shaders
+	_textureProgram.use();
 
 	// Draw code goes here
 	glActiveTexture(GL_TEXTURE0);
 
 	// Make sure the shader uses texture 0
-	//GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
-	//glUniform1i(textureUniform, 0);
+	GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
+	glUniform1i(textureUniform, 0);
 
 	// Grab the camera matrix
 	//glm::mat4 projectionMatrix = _camera.getCameraMatrix();
@@ -119,8 +118,8 @@ void PlayState::draw() {
 	// Render to the screen
 	_spriteBatch.renderBatch();
 
-	// Unbind the program
-	//_textureProgram.unuse();
+	// Disable shaders
+	_textureProgram.unuse();
 
 	// Swap our buffer and draw everything to the screen!
 	_window.swapBuffer();
