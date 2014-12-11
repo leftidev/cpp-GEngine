@@ -10,7 +10,6 @@ StateMachine::~StateMachine() {
 }
 
 void StateMachine::changeState(GameState* gameState) {
-
 	if (!_running) {
 		_running = true;
 	}

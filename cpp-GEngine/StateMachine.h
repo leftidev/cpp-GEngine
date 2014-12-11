@@ -4,8 +4,8 @@
 
 #include "GameState.h"
 
-class StateMachine
-{
+
+class StateMachine {
 public:
 	StateMachine();
 	~StateMachine();
@@ -21,11 +21,9 @@ public:
 	void draw();
 	bool running() { return _running; }
 	void quit() { _running = false; }
+
 private:
 	// The stack of states
 	std::vector<GameState*> _gameStates;
 	bool _running;
-
-
-	//GEngine::InputManager _inputManager; // Handles input
 };

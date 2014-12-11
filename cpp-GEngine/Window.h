@@ -6,15 +6,13 @@
 #include <string>
 
 
-enum WindowFlags
-{
+enum WindowFlags {
 	INVISIBLE = 0x1,
 	FULLSCREEN = 0x2,
 	BORDERLESS = 0x4
 };
 
-class Window
-{
+class Window {
 public:
 	Window();
 	~Window();
@@ -23,8 +21,9 @@ public:
 
 	void swapBuffer();
 
-	int getScreenWidth() { _screenWidth; }
-	int getScreenHeight() { _screenHeight; }
+	int getScreenWidth() { return _screenWidth; }
+	int getScreenHeight() { return _screenHeight; }
+
 private:
 	SDL_Window* _sdlWindow;
 	int _screenWidth, _screenHeight;

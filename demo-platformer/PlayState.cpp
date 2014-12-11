@@ -3,17 +3,18 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 
-#include "PlayState.h"
 #include <cpp-GEngine/StateMachine.h>
 #include <cpp-GEngine/Window.h>
 
+#include "PlayState.h"
+
 
 PlayState::PlayState(StateMachine& stateMachine, Window& window, InputManager& inputManager) : GameState(stateMachine, window, inputManager) {
+	std::cout << ": GameState::PlayState initialized.." << std::endl;
 }
 
 
-PlayState::~PlayState()
-{
+PlayState::~PlayState() {
 }
 
 void PlayState::init() {
@@ -45,7 +46,7 @@ void PlayState::initLevel() {
 }
 
 void PlayState::processEvents() {
-	std::cout << ">> PlayState processEvents" << std::endl;
+	//std::cout << ">> PlayState processEvents" << std::endl;
 	SDL_Event evnt;
 	// Will keep looping until there are no more events to process
 	while (SDL_PollEvent(&evnt)) {
@@ -72,11 +73,20 @@ void PlayState::processEvents() {
 }
 
 void PlayState::update() {
-	std::cout << ">> PlayState update" << std::endl;
+	//std::cout << ">> PlayState update" << std::endl;
+	if (_inputManager.isKeyPressed(SDLK_ESCAPE)) {
+		_stateMachine.quit();
+	}
+
+	if (_inputManager.isKeyPressed(SDLK_RETURN)) {
+		// Restart the level
+		_stateMachine.changeState(new PlayState(_stateMachine, _window, _inputManager));
+	}
+
 }
 
 void PlayState::draw() {
-	std::cout << ">> PlayState draw" << std::endl;
+	//std::cout << ">> PlayState draw" << std::endl;
 	// Set the base depth to 1.0
 	glClearDepth(1.0);
 	// Clear the color and depth buffer

@@ -2,12 +2,12 @@
 #include "StateMachine.h"
 #include "GameState.h"
 
+
 GameState::GameState(StateMachine& stateMachine, Window& window, InputManager& inputManager) :
 	_stateMachine(stateMachine),
 	_window(window),
 	_inputManager(inputManager) {
 }
-
 
 GameState::~GameState() {
 }

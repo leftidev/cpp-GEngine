@@ -29,13 +29,14 @@ int main(int argc, char** argv) {
 	// Set black background color
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	InputManager inputManager; ///< Handles input
+	// Initialize the InputManager
+	InputManager inputManager;
 
-	// Initialize the state machine
+	// Initialize the StateMachine
     StateMachine stateMachine;
 	stateMachine.changeState(new PlayState(stateMachine, window, inputManager));
 
-	// Some helpful constants.
+	// Some helpful constants for semi-fixed timestep
 	const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at
 	const int MAX_PHYSICS_STEPS = 6; // Max number of physics steps per frame
 	const float MS_PER_SECOND = 1000; // Number of milliseconds in a second

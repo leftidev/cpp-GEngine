@@ -18,7 +18,7 @@ public:
 	// Returns true if the key is held down.
 	bool isKeyDown(unsigned int keyID);
 
-	// Returns true if the key is held down.
+	// Returns true if the key was held down.
 	bool wasKeyDown(unsigned int keyID);
 
 	// Returns true if the key was just pressed.
