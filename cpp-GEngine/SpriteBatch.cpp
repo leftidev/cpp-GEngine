@@ -36,7 +36,6 @@ void SpriteBatch::end() {
 
 void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8& color) {
 	_glyphs.emplace_back(destRect, uvRect, texture, depth, color);
-
 }
 
 void SpriteBatch::renderBatch() {
@@ -46,7 +45,6 @@ void SpriteBatch::renderBatch() {
 
 	for (int i = 0; i < _renderBatches.size(); i++) {
 		glBindTexture(GL_TEXTURE_2D, _renderBatches[i].texture);
-
 		glDrawArrays(GL_TRIANGLES, _renderBatches[i].offset, _renderBatches[i].numVertices);
 	}
 
@@ -105,7 +103,6 @@ void SpriteBatch::createRenderBatches() {
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
 	// Upload the data
 	glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
-
 	// Unbind the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -138,7 +135,6 @@ void SpriteBatch::createVertexArray() {
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
 
 	glBindVertexArray(0);
-
 }
 
 void SpriteBatch::sortGlyphs()

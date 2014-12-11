@@ -12,7 +12,7 @@ GameState::GameState(StateMachine& stateMachine, Window& window, InputManager& i
 GameState::~GameState() {
 }
 
-void GameState::inputManagerUpdate() {
+void GameState::updateInputManager() {
 	_inputManager.update();
 }
 

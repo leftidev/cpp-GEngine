@@ -43,10 +43,6 @@ int main(int argc, char** argv) {
 	const float DESIRED_FRAMETIME = MS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
 	const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
 
-	// Zoom out the camera by 2x
-	const float CAMERA_SCALE = 1.0f / 2.0f;
-	//_camera.setScale(CAMERA_SCALE);
-
 	// Start our previousTicks variable
 	float previousTicks = SDL_GetTicks();
 
@@ -65,18 +61,19 @@ int main(int argc, char** argv) {
 			// The deltaTime should be the the smaller of the totalDeltaTime and MAX_DELTA_TIME
 			float deltaTime = std::min(totalDeltaTime, MAX_DELTA_TIME);
 			// Update all physics here and pass in deltaTime
-			stateMachine.inputManagerUpdate();
+			stateMachine.updateInputManager();
 			stateMachine.processEvents();
-			stateMachine.update();
+			stateMachine.update(deltaTime);
 
 			// Since we just took a step that is length deltaTime, subtract from totalDeltaTime
 			totalDeltaTime -= deltaTime;
 			// Increment our frame counter so we can limit steps to MAX_PHYSICS_STEPS
 			i++;
 		}
+		stateMachine.updateCamera();
 		stateMachine.draw();
 	}
-	// Leaving the scope of 'state_machine' will cleanup the engine.
+	// Leaving the scope of 'state_machine' will cleanup the engine
 
     return 0;
 }

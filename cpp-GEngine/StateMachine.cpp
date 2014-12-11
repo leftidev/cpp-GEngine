@@ -24,12 +24,16 @@ void StateMachine::changeState(GameState* gameState) {
 	_gameStates.back()->init();
 }
 
-void StateMachine::inputManagerUpdate() {
-	_gameStates.back()->inputManagerUpdate();
+void StateMachine::updateInputManager() {
+	_gameStates.back()->updateInputManager();
 }
 
-void StateMachine::update() {
-	_gameStates.back()->update();
+void StateMachine::update(float deltaTime) {
+	_gameStates.back()->update(deltaTime);
+}
+
+void StateMachine::updateCamera() {
+	_gameStates.back()->updateCamera();
 }
 
 void StateMachine::processEvents() {

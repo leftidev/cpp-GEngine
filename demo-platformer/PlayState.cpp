@@ -9,12 +9,19 @@
 #include "PlayState.h"
 
 
-PlayState::PlayState(StateMachine& stateMachine, Window& window, InputManager& inputManager) : GameState(stateMachine, window, inputManager) {
+PlayState::PlayState(StateMachine& stateMachine, Window& window, InputManager& inputManager) : 
+	GameState(stateMachine, window, inputManager),
+	_fps(0),
+	_player(nullptr) {
 	std::cout << ": GameState::PlayState initialized.." << std::endl;
 }
 
 
 PlayState::~PlayState() {
+	// Delete the levels
+	for (unsigned int i = 0; i < _levels.size(); i++) {
+		delete _levels[i];
+	}
 }
 
 void PlayState::init() {
@@ -25,7 +32,7 @@ void PlayState::init() {
 	_spriteBatch.init();
 
 	// Set up the camera
-	//_camera.init(_screenWidth, _screenHeight);
+	_camera.init(_window.getScreenWidth(), _window.getScreenHeight());
 
 	initLevel();
 }
@@ -40,7 +47,13 @@ void PlayState::initShaders() {
 }
 
 void PlayState::initLevel() {
+	// Initialize level 1
+	_levels.push_back(new Level("../assets/levels/level01.txt"));
+	_currentLevel = 0;
 
+	// Initialize the player.
+	_player = new Player();
+	_player->init(_levels[_currentLevel]->getStartPlayerPos(), &_inputManager, &_camera);
 }
 
 void PlayState::processEvents() {
@@ -70,7 +83,7 @@ void PlayState::processEvents() {
 	}
 }
 
-void PlayState::update() {
+void PlayState::update(float deltaTime) {
 	//std::cout << ">> PlayState update" << std::endl;
 	if (_inputManager.isKeyPressed(SDLK_ESCAPE)) {
 		_stateMachine.quit();
@@ -80,11 +93,25 @@ void PlayState::update() {
 		// Restart the level
 		_stateMachine.changeState(new PlayState(_stateMachine, _window, _inputManager));
 	}
+	if (_inputManager.isKeyPressed(SDLK_1)) {
+		// Restart the level
+		glClearColor(1.f, 0.5f, 0.5f, 1.f);
+	}
+	if (_inputManager.isKeyPressed(SDLK_2)) {
+		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
+	}
 
+	_player->update(_levels[_currentLevel]->_tiles, deltaTime);
+}
+
+void PlayState::updateCamera() {
+	//std::cout << ">> PlayState updateCamera" << std::endl;
+	// Make sure the camera is bound to the player position
+	_camera.setPosition(_player->getPosition());
+	_camera.update();
 }
 
 void PlayState::draw() {
-	//std::cout << ">> PlayState draw" << std::endl;
 	// Set the base depth to 1.0
 	glClearDepth(1.0);
 	// Clear the color and depth buffer
@@ -101,16 +128,24 @@ void PlayState::draw() {
 	glUniform1i(textureUniform, 0);
 
 	// Grab the camera matrix
-	//glm::mat4 projectionMatrix = _camera.getCameraMatrix();
-	//GLint pUniform = _textureProgram.getUniformLocation("P");
-	//glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+	glm::mat4 projectionMatrix = _camera.getCameraMatrix();
+	GLint pUniform = _textureProgram.getUniformLocation("P");
+	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-	// Begin drawing
+	const glm::vec2 tileDimensions(_levels[_currentLevel]->_tiles[0]->width);
+
+	// Begin drawing.
 	_spriteBatch.begin();
 
-	// Draw everything...
-	// Draw everything...
-	// Draw everything...
+	// Draw tiles with camera culling.
+	for (int i = 0; i < _levels[_currentLevel]->_tiles.size(); i++) {
+		if (_camera.isBoxInView(_levels[_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
+			_levels[_currentLevel]->_tiles[i]->draw(_spriteBatch);
+		}
+	}
+
+	// Draw player.
+	_player->draw(_spriteBatch);
 
 	// End sprite batch creation
 	_spriteBatch.end();

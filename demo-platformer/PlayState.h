@@ -5,6 +5,10 @@
 #include <cpp-GEngine/SpriteBatch.h>
 #include <cpp-GEngine/GLSLProgram.h>
 
+#include "Player.h"
+#include "Tile.h"
+#include "Level.h"
+
 
 class StateMachine;
 
@@ -16,11 +20,19 @@ public:
 	void initShaders();
 	void initLevel();
 	void processEvents() override;
-	void update() override;
+	void update(float deltaTime) override;
+	void updateCamera() override;
 	void draw() override;
 
 private:
 	GEngine::SpriteBatch _spriteBatch; // Draws all spritebatches
 	GEngine::GLSLProgram _textureProgram; // The shader program
+	std::vector<Level*> _levels; // vector of all levels
+
+	Player* _player;
+
+	float _fps;
+	int _currentLevel;
+	int _frameCounter = 0;
 };
 

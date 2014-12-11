@@ -12,11 +12,13 @@ public:
 	// Runs the game
 	void changeState(GameState* gameState);
 	// Input manager update
-	void inputManagerUpdate();
+	void updateInputManager();
 	// Main game loop for the program
-	void update();
+	void update(float deltaTime);
 	// Handles input processing
 	void processEvents();
+	// Update camera
+	void updateCamera();
 	// Renders the game
 	void draw();
 	bool running() { return _running; }
