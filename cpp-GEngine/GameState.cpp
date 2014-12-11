@@ -3,13 +3,13 @@
 #include "StateMachine.h"
 
 
-	GameState::GameState(StateMachine& stateMachine) : _stateMachine(stateMachine) {
-	}
+GameState::GameState(StateMachine& stateMachine) : _stateMachine(stateMachine) {
+}
 
 
-	GameState::~GameState() {
-	}
+GameState::~GameState() {
+}
 
-	void GameState::changeState(StateMachine& machine, GameState* state) {
-		machine.changeState(state);
-	}
+void GameState::changeState(StateMachine& machine, GameState* state) {
+	machine.changeState(state);
+}
