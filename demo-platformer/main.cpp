@@ -29,9 +29,11 @@ int main(int argc, char** argv) {
 	// Set black background color
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+	InputManager inputManager; ///< Handles input
+
 	// Initialize the state machine
     StateMachine stateMachine;
-	stateMachine.changeState(new PlayState(stateMachine, window));
+	stateMachine.changeState(new PlayState(stateMachine, window, inputManager));
 
 	// Some helpful constants.
 	const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at

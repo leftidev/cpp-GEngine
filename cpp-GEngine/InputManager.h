@@ -3,10 +3,7 @@
 #include <glm/glm.hpp>
 #include <unordered_map>
 
-namespace GEngine {
-
-class InputManager
-{
+class InputManager {
 public:
 	InputManager();
 	~InputManager();
@@ -35,5 +32,3 @@ private:
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
 	glm::vec2 _mouseCoords;
 };
-
-}

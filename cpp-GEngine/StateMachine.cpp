@@ -26,7 +26,7 @@ void StateMachine::changeState(GameState* gameState) {
 }
 
 void StateMachine::inputManagerUpdate() {
-	//_inputManager.update();
+	_gameStates.back()->inputManagerUpdate();
 }
 
 void StateMachine::update() {

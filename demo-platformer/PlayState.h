@@ -7,7 +7,7 @@ class StateMachine;
 
 class PlayState : public GameState {
 public:
-	PlayState(StateMachine& stateMachine, Window& window);
+	PlayState(StateMachine& stateMachine, Window& window, InputManager& inputManager);
 	~PlayState();
 	void init() override;
 	void initShaders();
@@ -15,8 +15,5 @@ public:
 	void processEvents() override;
 	void update() override;
 	void draw() override;
-
-private:
-	GEngine::InputManager _inputManager; // Handles input
 };
 

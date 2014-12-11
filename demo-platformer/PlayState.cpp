@@ -8,7 +8,7 @@
 #include <cpp-GEngine/Window.h>
 
 
-PlayState::PlayState(StateMachine& stateMachine, Window& window) : GameState(stateMachine, window) {
+PlayState::PlayState(StateMachine& stateMachine, Window& window, InputManager& inputManager) : GameState(stateMachine, window, inputManager) {
 }
 
 
