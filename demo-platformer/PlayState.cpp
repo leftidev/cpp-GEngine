@@ -38,7 +38,7 @@ void PlayState::init() {
 }
 
 void PlayState::initShaders() {
-	// Compile the color shader.
+	// Compile the color shader
 	_textureProgram.compileShaders("../assets/shaders/textureShading.vert", "../assets/shaders/textureShading.frag");
 	_textureProgram.addAttribute("vertexPosition");
 	_textureProgram.addAttribute("vertexColor");
@@ -51,13 +51,12 @@ void PlayState::initLevel() {
 	_levels.push_back(new Level("../assets/levels/level01.txt"));
 	_currentLevel = 0;
 
-	// Initialize the player.
+	// Initialize the player
 	_player = new Player();
 	_player->init(_levels[_currentLevel]->getStartPlayerPos(), &_inputManager, &_camera);
 }
 
 void PlayState::processEvents() {
-	//std::cout << ">> PlayState processEvents" << std::endl;
 	SDL_Event evnt;
 	// Will keep looping until there are no more events to process
 	while (SDL_PollEvent(&evnt)) {
@@ -84,7 +83,6 @@ void PlayState::processEvents() {
 }
 
 void PlayState::update(float deltaTime) {
-	//std::cout << ">> PlayState update" << std::endl;
 	if (_inputManager.isKeyPressed(SDLK_ESCAPE)) {
 		_stateMachine.quit();
 	}
@@ -105,7 +103,6 @@ void PlayState::update(float deltaTime) {
 }
 
 void PlayState::updateCamera() {
-	//std::cout << ">> PlayState updateCamera" << std::endl;
 	// Make sure the camera is bound to the player position
 	_camera.setPosition(_player->getPosition());
 	_camera.update();
@@ -132,19 +129,19 @@ void PlayState::draw() {
 	GLint pUniform = _textureProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-	const glm::vec2 tileDimensions(_levels[_currentLevel]->_tiles[0]->width);
+	const glm::vec2 tileDimensions(64.0f);
 
-	// Begin drawing.
+	// Begin drawing
 	_spriteBatch.begin();
 
-	// Draw tiles with camera culling.
+	// Draw tiles with camera culling
 	for (int i = 0; i < _levels[_currentLevel]->_tiles.size(); i++) {
 		if (_camera.isBoxInView(_levels[_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
 			_levels[_currentLevel]->_tiles[i]->draw(_spriteBatch);
 		}
 	}
 
-	// Draw player.
+	// Draw player
 	_player->draw(_spriteBatch);
 
 	// End sprite batch creation

@@ -39,7 +39,8 @@ int main(int argc, char** argv) {
 
 	// Used to cap the FPS
 	GEngine::FpsLimiter fpsLimiter;
-	fpsLimiter.setMaxFPS(3000000.0f);
+	fpsLimiter.setMaxFPS(60.0f);
+	float fps;
 
 	// Some helpful constants for semi-fixed timestep
 	const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at
@@ -53,6 +54,8 @@ int main(int argc, char** argv) {
 
 	// Main loop
 	while (stateMachine.running()) {
+		fpsLimiter.beginFrame();
+
 		// Calculate the frameTime in milliseconds
 		float newTicks = SDL_GetTicks();
 		float frameTime = newTicks - previousTicks;
@@ -77,6 +80,9 @@ int main(int argc, char** argv) {
 		}
 		stateMachine.updateCamera();
 		stateMachine.draw();
+		// End the frame, limit the FPS, and get the current FPS.
+		fps = fpsLimiter.endFrame();
+		std::cout << fps << std::endl;
 	}
 	// Leaving the scope of 'state_machine' will cleanup the engine
 

@@ -28,8 +28,7 @@ protected:
 	StateMachine& _stateMachine;
 	Window& _window;
 	InputManager& _inputManager;
-	GEngine::Camera2D _camera; // main Camera
-
+	GEngine::Camera2D _camera; // main camera
 };
 
 }

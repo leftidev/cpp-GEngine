@@ -25,7 +25,7 @@ public:
 	void draw() override;
 
 private:
-	GEngine::SpriteBatch _spriteBatch; // Draws all spritebatches
+	GEngine::SpriteBatch _spriteBatch; // Draws all sprites
 	GEngine::GLSLProgram _textureProgram; // The shader program
 	std::vector<Level*> _levels; // vector of all levels
 
