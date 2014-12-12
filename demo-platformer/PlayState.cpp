@@ -3,15 +3,14 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 
-#include <cpp-GEngine/StateMachine.h>
+#include <cpp-GEngine/StateManager.h>
 #include <cpp-GEngine/Window.h>
 
 #include "PlayState.h"
 
 
-PlayState::PlayState(GEngine::StateMachine& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager) :
+PlayState::PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager) :
 	GameState(stateMachine, window, inputManager),
-	_fps(0),
 	_player(nullptr) {
 	std::cout << ": GameState::PlayState initialized.." << std::endl;
 }
@@ -86,13 +85,11 @@ void PlayState::update(float deltaTime) {
 	if (_inputManager.isKeyPressed(SDLK_ESCAPE)) {
 		_stateMachine.quit();
 	}
-
 	if (_inputManager.isKeyPressed(SDLK_RETURN)) {
 		// Restart the level
 		_stateMachine.changeState(new PlayState(_stateMachine, _window, _inputManager));
 	}
 	if (_inputManager.isKeyPressed(SDLK_1)) {
-		// Restart the level
 		glClearColor(1.f, 0.5f, 0.5f, 1.f);
 	}
 	if (_inputManager.isKeyPressed(SDLK_2)) {
@@ -117,7 +114,6 @@ void PlayState::draw() {
 	// Enable shaders
 	_textureProgram.use();
 
-	// Draw code goes here
 	glActiveTexture(GL_TEXTURE0);
 
 	// Make sure the shader uses texture 0

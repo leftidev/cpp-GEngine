@@ -1,17 +1,17 @@
-#include "StateMachine.h"
+#include "StateManager.h"
 
 
 namespace GEngine {
 
-StateMachine::StateMachine() {
+StateManager::StateManager() {
 	// Empty
 }
 
-StateMachine::~StateMachine() {
+StateManager::~StateManager() {
 	// Empty
 }
 
-void StateMachine::changeState(GameState* gameState) {
+void StateManager::changeState(GameState* gameState) {
 	if (!_running) {
 		_running = true;
 	}
@@ -26,23 +26,23 @@ void StateMachine::changeState(GameState* gameState) {
 	_gameStates.back()->init();
 }
 
-void StateMachine::updateInputManager() {
+void StateManager::updateInputManager() {
 	_gameStates.back()->updateInputManager();
 }
 
-void StateMachine::update(float deltaTime) {
+void StateManager::update(float deltaTime) {
 	_gameStates.back()->update(deltaTime);
 }
 
-void StateMachine::updateCamera() {
+void StateManager::updateCamera() {
 	_gameStates.back()->updateCamera();
 }
 
-void StateMachine::processEvents() {
+void StateManager::processEvents() {
 	_gameStates.back()->processEvents();
 }
 
-void StateMachine::draw() {
+void StateManager::draw() {
 	_gameStates.back()->draw();
 }
 

@@ -4,7 +4,7 @@
 
 namespace GEngine {
 
-class StateMachine;
+class StateManager;
 class Window;
 class InputManager;
 
@@ -14,7 +14,7 @@ namespace GEngine {
 
 class GameState {
 public:
-	GameState(StateMachine& stateMachine, Window& window, InputManager& inputManager);
+	GameState(StateManager& stateMachine, Window& window, InputManager& inputManager);
 	virtual ~GameState();
 	virtual void init() = 0;
 	virtual void processEvents() = 0;
@@ -22,10 +22,10 @@ public:
 	void updateInputManager();
 	virtual void updateCamera() = 0;
 	virtual void draw() = 0;
-	void changeState(StateMachine& machine, GameState* state);
+	void changeState(StateManager& machine, GameState* state);
 
 protected:
-	StateMachine& _stateMachine;
+	StateManager& _stateMachine;
 	Window& _window;
 	InputManager& _inputManager;
 	GEngine::Camera2D _camera; // main camera

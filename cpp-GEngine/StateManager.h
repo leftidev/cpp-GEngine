@@ -7,10 +7,10 @@
 
 namespace GEngine {
 
-class StateMachine {
+class StateManager {
 public:
-	StateMachine();
-	~StateMachine();
+	StateManager();
+	~StateManager();
 	// Runs the game
 	void changeState(GameState* gameState);
 	// Input manager update

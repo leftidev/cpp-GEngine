@@ -7,7 +7,7 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 
-#include <cpp-GEngine/StateMachine.h>
+#include <cpp-GEngine/StateManager.h>
 #include <cpp-GEngine/GameState.h>
 #include <cpp-GEngine/GEngine.h>
 #include <cpp-GEngine/Window.h>
@@ -33,9 +33,9 @@ int main(int argc, char** argv) {
 	// Initialize the InputManager
 	GEngine::InputManager inputManager;
 
-	// Initialize the StateMachine
-    GEngine::StateMachine stateMachine;
-	stateMachine.changeState(new PlayState(stateMachine, window, inputManager));
+	// Initialize the StateManager
+    GEngine::StateManager stateManager;
+	stateManager.changeState(new PlayState(stateManager, window, inputManager));
 
 	// Used to cap the FPS
 	GEngine::FpsLimiter fpsLimiter;
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
 	float previousTicks = SDL_GetTicks();
 
 	// Main loop
-	while (stateMachine.running()) {
+	while (stateManager.running()) {
 		fpsLimiter.beginFrame();
 
 		// Calculate the frameTime in milliseconds
@@ -69,20 +69,22 @@ int main(int argc, char** argv) {
 			// The deltaTime should be the the smaller of the totalDeltaTime and MAX_DELTA_TIME
 			float deltaTime = std::min(totalDeltaTime, MAX_DELTA_TIME);
 			// Update all physics here and pass in deltaTime
-			stateMachine.updateInputManager();
-			stateMachine.processEvents();
-			stateMachine.update(deltaTime);
+			stateManager.updateInputManager();
+			stateManager.processEvents();
+			stateManager.update(deltaTime);
 
 			// Since we just took a step that is length deltaTime, subtract from totalDeltaTime
 			totalDeltaTime -= deltaTime;
 			// Increment our frame counter so we can limit steps to MAX_PHYSICS_STEPS
 			i++;
 		}
-		stateMachine.updateCamera();
-		stateMachine.draw();
+		
+		stateManager.updateCamera();
+		stateManager.draw();
+
 		// End the frame, limit the FPS, and get the current FPS.
 		fps = fpsLimiter.endFrame();
-		std::cout << fps << std::endl;
+		//std::cout << fps << std::endl;
 	}
 	// Leaving the scope of 'state_machine' will cleanup the engine
 

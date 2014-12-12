@@ -10,11 +10,11 @@
 #include "Level.h"
 
 
-class StateMachine;
+class StateManager;
 
 class PlayState : public GEngine::GameState {
 public:
-	PlayState(GEngine::StateMachine& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager);
+	PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager);
 	~PlayState();
 	void init() override;
 	void initShaders();
@@ -30,9 +30,7 @@ private:
 	std::vector<Level*> _levels; // vector of all levels
 
 	Player* _player;
-
-	float _fps;
+	GLenum result;
 	int _currentLevel;
-	int _frameCounter = 0;
 };
 
