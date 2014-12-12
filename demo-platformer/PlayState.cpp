@@ -33,6 +33,10 @@ void PlayState::init() {
 	// Set up the camera
 	_camera.init(1024, 768);
 
+	// Zoom out the camera by 2x
+	const float CAMERA_SCALE = 1.0f / 2.0f;
+	_camera.setScale(CAMERA_SCALE);
+
 	initLevel();
 }
 
