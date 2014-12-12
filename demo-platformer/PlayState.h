@@ -29,6 +29,7 @@ private:
 	GEngine::GLSLProgram _textureProgram; // The shader program
 	std::vector<Level*> _levels; // vector of all levels
 
+
 	Player* _player;
 	GLenum result;
 	int _currentLevel;

@@ -17,8 +17,6 @@ void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::
     width = 64.0f;
     height = 64.0f;
 
-    runningSpeed = 15.0f;
-
     _speed.x = 0.0f;
     _speed.y = 0.0f;
 
@@ -41,16 +39,16 @@ void Player::update(std::vector<Tile*> tiles, float deltaTime) {
     // Player is in air, apply gravity
     if (inAir) {
         jumped = true;
-        _speed.y -= 0.80f * deltaTime;
+		_speed.y -= gravityAcceleration * deltaTime;
     }
 
     // Move left
     if (_inputManager->isKeyDown(SDLK_a)) {
-        _speed.x = -runningSpeed;
+		_speed.x = -MAX_SPEED;
     }
     // Move right
     else if (_inputManager->isKeyDown(SDLK_d)) {
-        _speed.x = runningSpeed;
+		_speed.x = MAX_SPEED;
     }
     else {
         _speed.x = 0.0f;
@@ -73,7 +71,7 @@ void Player::update(std::vector<Tile*> tiles, float deltaTime) {
 }
 
 void Player::jump() {
-    _speed.y = 30.0f;
+    _speed.y = JUMP_SPEED;
     inAir = true;
     jumped = true;
 }

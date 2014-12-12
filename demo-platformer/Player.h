@@ -7,6 +7,9 @@
 #include "Tile.h"
 
 
+const float MAX_SPEED = 10.0f;
+const float JUMP_SPEED = 25.0f;
+
 class Player : public Entity {
 public:
     Player();
@@ -17,12 +20,13 @@ public:
     void jump();
     void collide(glm::fvec2(speed), std::vector<Tile*> tiles);
 
-    float runningSpeed;
     bool inAir = true;
     bool jumped = false;
 
 private:
 	GEngine::InputManager* _inputManager;
 	GEngine::Camera2D* _camera;
+
+	float gravityAcceleration = 0.80f;
 };
 

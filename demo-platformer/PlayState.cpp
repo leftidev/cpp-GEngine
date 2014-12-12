@@ -31,7 +31,7 @@ void PlayState::init() {
 	_spriteBatch.init();
 
 	// Set up the camera
-	_camera.init(_window.getScreenWidth(), _window.getScreenHeight());
+	_camera.init(1024, 768);
 
 	initLevel();
 }
