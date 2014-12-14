@@ -14,7 +14,7 @@ class StateManager;
 
 class PlayState : public GEngine::GameState {
 public:
-	PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager);
+	PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager, int currentLevel);
 	~PlayState();
 	void init() override;
 	void initShaders();
@@ -32,6 +32,6 @@ private:
 
 	Player* _player;
 	GLenum result;
-	int _currentLevel;
+	int _currentLevel = 0;
 };
 

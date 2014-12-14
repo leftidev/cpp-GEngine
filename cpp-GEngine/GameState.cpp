@@ -4,17 +4,18 @@
 
 namespace GEngine {
 
-GameState::GameState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager) :
-	_stateMachine(stateMachine),
-	_window(window),
-	_inputManager(inputManager) {
+GameState::GameState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager, int currentLevel) :
+	m_stateMachine(stateMachine),
+	m_window(window),
+	m_inputManager(inputManager),
+	m_currentLevel(currentLevel) {
 }
 
 GameState::~GameState() {
 }
 
 void GameState::updateInputManager() {
-	_inputManager.update();
+	m_inputManager.update();
 }
 
 void GameState::changeState(StateManager& machine, GameState* state) {

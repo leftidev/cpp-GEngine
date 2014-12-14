@@ -9,8 +9,8 @@
 #include "PlayState.h"
 
 
-PlayState::PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager) :
-	GameState(stateMachine, window, inputManager),
+PlayState::PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager, int currentLevel) :
+	GameState(stateMachine, window, inputManager, currentLevel),
 	_player(nullptr) {
 	std::cout << ": GameState::PlayState initialized.." << std::endl;
 }
@@ -31,11 +31,11 @@ void PlayState::init() {
 	_spriteBatch.init();
 
 	// Set up the camera
-	_camera.init(1024, 768);
+	m_camera.init(1024, 768);
 
 	// Zoom out the camera by 2x
 	const float CAMERA_SCALE = 1.0f / 2.0f;
-	_camera.setScale(CAMERA_SCALE);
+	m_camera.setScale(CAMERA_SCALE);
 
 	initLevel();
 }
@@ -51,12 +51,16 @@ void PlayState::initShaders() {
 
 void PlayState::initLevel() {
 	// Initialize level 1
-	_levels.push_back(new Level("../assets/levels/level01.txt"));
-	_currentLevel = 0;
+	if (m_currentLevel == 1) {
+		_levels.push_back(new Level("../assets/levels/level01.txt"));
+	}
+	else if (m_currentLevel == 2) {
+		_levels.push_back(new Level("../assets/levels/level02.txt"));
+	}
 
 	// Initialize the player
 	_player = new Player();
-	_player->init(_levels[_currentLevel]->getStartPlayerPos(), &_inputManager, &_camera);
+	_player->init(_levels[_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera);
 }
 
 void PlayState::processEvents() {
@@ -65,38 +69,38 @@ void PlayState::processEvents() {
 	while (SDL_PollEvent(&evnt)) {
 		switch (evnt.type) {
 		case SDL_QUIT:
-			_stateMachine.quit();
+			m_stateMachine.quit();
 		case SDL_MOUSEMOTION:
-			_inputManager.setMouseCoords(float(evnt.motion.x), float(evnt.motion.y));
+			m_inputManager.setMouseCoords(float(evnt.motion.x), float(evnt.motion.y));
 			break;
 		case SDL_KEYDOWN:
-			_inputManager.pressKey(evnt.key.keysym.sym);
+			m_inputManager.pressKey(evnt.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
-			_inputManager.releaseKey(evnt.key.keysym.sym);
+			m_inputManager.releaseKey(evnt.key.keysym.sym);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			_inputManager.pressKey(evnt.button.button);
+			m_inputManager.pressKey(evnt.button.button);
 			break;
 		case SDL_MOUSEBUTTONUP:
-			_inputManager.releaseKey(evnt.button.button);
+			m_inputManager.releaseKey(evnt.button.button);
 			break;
 		}
 	}
 }
 
 void PlayState::update(float deltaTime) {
-	if (_inputManager.isKeyPressed(SDLK_ESCAPE)) {
-		_stateMachine.quit();
+	if (m_inputManager.isKeyPressed(SDLK_ESCAPE)) {
+		m_stateMachine.quit();
 	}
-	if (_inputManager.isKeyPressed(SDLK_RETURN)) {
+	if (m_inputManager.isKeyPressed(SDLK_RETURN)) {
 		// Restart the level
-		_stateMachine.changeState(new PlayState(_stateMachine, _window, _inputManager));
+		m_stateMachine.changeState(new PlayState(m_stateMachine, m_window, m_inputManager, m_currentLevel));
 	}
-	if (_inputManager.isKeyPressed(SDLK_1)) {
+	if (m_inputManager.isKeyPressed(SDLK_1)) {
 		glClearColor(1.f, 0.5f, 0.5f, 1.f);
 	}
-	if (_inputManager.isKeyPressed(SDLK_2)) {
+	if (m_inputManager.isKeyPressed(SDLK_2)) {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
 	}
 
@@ -105,8 +109,8 @@ void PlayState::update(float deltaTime) {
 
 void PlayState::updateCamera() {
 	// Make sure the camera is bound to the player position
-	_camera.setPosition(_player->getPosition());
-	_camera.update();
+	m_camera.setPosition(_player->getPosition());
+	m_camera.update();
 }
 
 void PlayState::draw() {
@@ -125,7 +129,7 @@ void PlayState::draw() {
 	glUniform1i(textureUniform, 0);
 
 	// Grab the camera matrix
-	glm::mat4 projectionMatrix = _camera.getCameraMatrix();
+	glm::mat4 projectionMatrix = m_camera.getCameraMatrix();
 	GLint pUniform = _textureProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
@@ -136,7 +140,7 @@ void PlayState::draw() {
 
 	// Draw tiles with camera culling
 	for (int i = 0; i < _levels[_currentLevel]->_tiles.size(); i++) {
-		if (_camera.isBoxInView(_levels[_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
+		if (m_camera.isBoxInView(_levels[_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
 			_levels[_currentLevel]->_tiles[i]->draw(_spriteBatch);
 		}
 	}
@@ -154,5 +158,5 @@ void PlayState::draw() {
 	_textureProgram.unuse();
 
 	// Swap our buffer and draw everything to the screen!
-	_window.swapBuffer();
+	m_window.swapBuffer();
 }

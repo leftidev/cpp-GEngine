@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
 	// Initialize the StateManager
     GEngine::StateManager stateManager;
-	stateManager.changeState(new PlayState(stateManager, window, inputManager));
+	stateManager.changeState(new PlayState(stateManager, window, inputManager, 1));
 
 	// Used to cap the FPS
 	GEngine::FpsLimiter fpsLimiter;
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
 
 		// End the frame, limit the FPS, and get the current FPS.
 		fps = fpsLimiter.endFrame();
-		//std::cout << fps << std::endl;
+		std::cout << fps << std::endl;
 	}
 	// Leaving the scope of 'state_machine' will cleanup the engine
 
