@@ -6,8 +6,6 @@
 #include <cpp-GEngine/GLSLProgram.h>
 
 #include "Player.h"
-#include "Tile.h"
-#include "Level.h"
 
 
 class StateManager;
@@ -27,7 +25,6 @@ public:
 private:
 	GEngine::SpriteBatch m_spriteBatch; // Draws all sprites
 	GEngine::GLSLProgram m_textureProgram; // The shader program
-	std::vector<Level*> _levels; // vector of all levels
 
 	Player* m_player;
 	int m_currentLevel = 0;

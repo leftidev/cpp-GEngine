@@ -16,12 +16,7 @@ PlayState::PlayState(GEngine::StateManager& stateMachine, GEngine::Window& windo
 }
 
 
-PlayState::~PlayState() {
-	// Delete the levels
-	for (unsigned int i = 0; i < _levels.size(); i++) {
-		delete _levels[i];
-	}
-}
+PlayState::~PlayState() { }
 
 void PlayState::init() {
 	// Set up the shaders
@@ -34,7 +29,7 @@ void PlayState::init() {
 	m_camera.init(1024, 768);
 
 	// Zoom out the camera by 2x
-	const float CAMERA_SCALE = 1.0f / 2.0f;
+	const float CAMERA_SCALE = 1.0f;
 	m_camera.setScale(CAMERA_SCALE);
 
 	initLevel();
@@ -50,17 +45,9 @@ void PlayState::initShaders() {
 }
 
 void PlayState::initLevel() {
-	// Initialize level 1
-	if (m_currentLevel == 1) {
-		_levels.push_back(new Level("../assets/levels/level01.txt"));
-	}
-	else if (m_currentLevel == 2) {
-		_levels.push_back(new Level("../assets/levels/level02.txt"));
-	}
-
 	// Initialize the player
 	m_player = new Player();
-	m_player->init(_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera);
+	m_player->init(glm::fvec2(0, -(768 / 2)), &m_inputManager, &m_camera);
 }
 
 void PlayState::processEvents() {
@@ -104,12 +91,10 @@ void PlayState::update(float deltaTime) {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
 	}
 
-	m_player->update(_levels[m_currentLevel]->_tiles, deltaTime);
+	m_player->update(deltaTime);
 }
 
 void PlayState::updateCamera() {
-	// Make sure the camera is bound to the player position
-	m_camera.setPosition(m_player->getPosition());
 	m_camera.update();
 }
 
@@ -137,13 +122,6 @@ void PlayState::draw() {
 
 	// Begin drawing
 	m_spriteBatch.begin();
-
-	// Draw tiles with camera culling
-	for (int i = 0; i < _levels[m_currentLevel]->_tiles.size(); i++) {
-		if (m_camera.isBoxInView(_levels[m_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
-			_levels[m_currentLevel]->_tiles[i]->draw(m_spriteBatch);
-		}
-	}
 
 	// Draw player
 	m_player->draw(m_spriteBatch);
