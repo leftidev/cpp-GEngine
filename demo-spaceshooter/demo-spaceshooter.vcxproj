@@ -70,15 +70,19 @@
     <None Include="Release.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="Projectile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

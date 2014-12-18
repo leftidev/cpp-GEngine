@@ -5,6 +5,7 @@
 #include <cpp-GEngine/SpriteBatch.h>
 #include <cpp-GEngine/GLSLProgram.h>
 
+#include "Enemy.h"
 #include "Player.h"
 
 
@@ -26,7 +27,9 @@ private:
 	GEngine::SpriteBatch m_spriteBatch; // Draws all sprites
 	GEngine::GLSLProgram m_textureProgram; // The shader program
 
-	Player* m_player;
+	std::vector<Enemy*> m_enemies; // All enemies
+
+	Player* m_player = nullptr;
 	int m_currentLevel = 0;
 };
 

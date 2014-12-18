@@ -12,19 +12,19 @@ public:
     Entity();
     virtual ~Entity();
 
-    void draw(GEngine::SpriteBatch& _spriteBatch);
+    void draw(GEngine::SpriteBatch& spriteBatch);
 
-    glm::fvec2 getPosition() const { return _position; }
+    glm::fvec2 getPosition() const { return m_position; }
 
     float width;
     float height;
 
 protected:
-    bool collideWithTile(int width, int height, Entity* entity);
+	bool collideWithEntity(int width, int height, Entity* entity);
 
-    int textureID;
+    int m_textureID;
 
-    glm::fvec2 _position;
-    GEngine::ColorRGBA8 _color;
-    glm::fvec2 _speed;
+    glm::fvec2 m_position;
+    GEngine::ColorRGBA8 m_color;
+    glm::fvec2 m_speed;
 };

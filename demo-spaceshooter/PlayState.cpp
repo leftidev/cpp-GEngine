@@ -10,8 +10,7 @@
 
 
 PlayState::PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager, int currentLevel) :
-	GameState(stateMachine, window, inputManager, currentLevel),
-	m_player(nullptr) {
+	GameState(stateMachine, window, inputManager, currentLevel) {
 	std::cout << ": GameState::PlayState initialized.." << std::endl;
 }
 
@@ -48,6 +47,12 @@ void PlayState::initLevel() {
 	// Initialize the player
 	m_player = new Player();
 	m_player->init(glm::fvec2(0, -(768 / 2)), &m_inputManager, &m_camera);
+
+	// Add the enemies
+	for (unsigned int i = 0; i < 10; i++) {
+		m_enemies.push_back(new Enemy);
+		m_enemies.back()->init(GEngine::ResourceManager::getTexture("../assets/textures/pacified_enemy_104x104.png").id, glm::fvec2(0.0f, 0.0f), glm::fvec2(420.0f - (i * 70), 768 / 2 - 70), EnemyType::X_MOVING);
+	}
 }
 
 void PlayState::processEvents() {
@@ -91,7 +96,11 @@ void PlayState::update(float deltaTime) {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
 	}
 
-	m_player->update(deltaTime);
+	m_player->update(m_enemies, deltaTime);
+
+	for (unsigned int i = 0; i < m_enemies.size(); i++) {
+		m_enemies[i]->update(m_player->projectiles, deltaTime);
+	}
 }
 
 void PlayState::updateCamera() {
@@ -118,13 +127,24 @@ void PlayState::draw() {
 	GLint pUniform = m_textureProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-	const glm::vec2 tileDimensions(64.0f);
+	const glm::vec2 enemyDimensions(48.0f);
 
 	// Begin drawing
 	m_spriteBatch.begin();
 
 	// Draw player
 	m_player->draw(m_spriteBatch);
+
+	// Draw the enemies
+	for (unsigned int i = 0; i < m_enemies.size(); i++) {
+		if (m_camera.isBoxInView(m_enemies[i]->getPosition(), enemyDimensions)) {
+			m_enemies[i]->draw(m_spriteBatch);
+		}
+	}
+
+	for (unsigned int i = 0; i < m_player->projectiles.size(); i++) {
+		m_player->projectiles[i]->draw(m_spriteBatch);
+	}
 
 	// End sprite batch creation
 	m_spriteBatch.end();
