@@ -40,11 +40,14 @@ void PlayState::init() {
 }
 
 void PlayState::loadShaders() {
+	// Create and compile the shaders
 	m_shaders.push_back(GEngine::Shader("../assets/shaders/textureShading.vert", GL_VERTEX_SHADER));
 	m_shaders.push_back(GEngine::Shader("../assets/shaders/textureShading.frag", GL_FRAGMENT_SHADER));
+	// Add attributes to shaders
 	m_shaderProgram.addAttribute("vertexPosition");
 	m_shaderProgram.addAttribute("vertexColor");
 	m_shaderProgram.addAttribute("vertexUV");
+	// Link the shaders
 	m_shaderProgram.linkShaders(m_shaders);
 }
 
