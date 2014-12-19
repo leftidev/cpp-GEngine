@@ -2,25 +2,53 @@
 
 
 namespace GEngine {
+	class Timer {
+	public:
+		Timer();
+		~Timer();
 
-class FpsLimiter {
-public:
-	FpsLimiter();
+		//The various clock actions
+		void start();
+		void stop();
+		void pause();
+		void unpause();
 
-	void init(float maxFPS);
-	void setMaxFPS(float maxFPS);
-	void beginFrame();
+		// Gets the timer's time
+		int get_ticks();
 
-	// Return the current FPS
-	float endFrame();
+		// Checks the status of the timer
+		bool is_started();
+		bool is_paused();
 
-private:
-	float _fps;
-	float _maxFPS;
-	float _frameTime;
-	unsigned int _startTicks;
+	private:
+		// The clock time when the timer started
+		int startTicks;
 
-	void calculateFPS();
+		// The ticks stored when the timer was paused
+		int pausedTicks;
+
+		// The timer status
+		bool paused;
+		bool started;
+	};
+
+	class FpsLimiter {
+	public:
+		FpsLimiter();
+
+		void init(float maxFPS);
+		void setMaxFPS(float maxFPS);
+		void beginFrame();
+
+		// Return the current FPS
+		float endFrame();
+
+	private:
+		float _fps;
+		float _maxFPS;
+		float _frameTime;
+		unsigned int _startTicks;
+
+		void calculateFPS();
 };
-
 }
