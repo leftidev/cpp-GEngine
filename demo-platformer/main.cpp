@@ -19,6 +19,13 @@
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 
+// Some helpful constants for semi-fixed timestep
+const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at
+const int MAX_PHYSICS_STEPS = 6; // Max number of physics steps per frame
+const float MS_PER_SECOND = 1000; // Number of milliseconds in a second
+const float DESIRED_FRAMETIME = MS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
+const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
+
 int main(int argc, char** argv) {
 	// Initialize the game engine
 	GEngine::init();
@@ -39,15 +46,8 @@ int main(int argc, char** argv) {
 
 	// Used to cap the FPS
 	GEngine::FpsLimiter fpsLimiter;
-	fpsLimiter.setMaxFPS(300.0f);
+	fpsLimiter.setMaxFPS(200.0f);
 	float fps;
-
-	// Some helpful constants for semi-fixed timestep
-	const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at
-	const int MAX_PHYSICS_STEPS = 6; // Max number of physics steps per frame
-	const float MS_PER_SECOND = 1000; // Number of milliseconds in a second
-	const float DESIRED_FRAMETIME = MS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
-	const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
 
 	// Start our previousTicks variable
 	float previousTicks = SDL_GetTicks();

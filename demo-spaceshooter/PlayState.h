@@ -3,7 +3,8 @@
 #include <cpp-GEngine/GameState.h>
 #include <cpp-GEngine/InputManager.h>
 #include <cpp-GEngine/SpriteBatch.h>
-#include <cpp-GEngine/GLSLProgram.h>
+#include <cpp-GEngine/Shader.h>
+#include <cpp-GEngine/ShaderProgram.h>
 
 #include "Enemy.h"
 #include "Player.h"
@@ -16,7 +17,7 @@ public:
 	PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager, int currentLevel);
 	~PlayState();
 	void init() override;
-	void initShaders();
+	void loadShaders();
 	void initLevel();
 	void processEvents() override;
 	void update(float deltaTime) override;
@@ -25,7 +26,8 @@ public:
 
 private:
 	GEngine::SpriteBatch m_spriteBatch; // Draws all sprites
-	GEngine::GLSLProgram m_textureProgram; // The shader program
+	GEngine::ShaderProgram m_shaderProgram; // The shader program
+	std::vector<GEngine::Shader> m_shaders;
 
 	std::vector<Enemy*> m_enemies; // All enemies
 

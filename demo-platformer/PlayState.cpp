@@ -10,22 +10,21 @@
 
 
 PlayState::PlayState(GEngine::StateManager& stateMachine, GEngine::Window& window, GEngine::InputManager& inputManager, int currentLevel) :
-	GameState(stateMachine, window, inputManager, currentLevel),
-	m_player(nullptr) {
+	GameState(stateMachine, window, inputManager, currentLevel) {
 	std::cout << ": GameState::PlayState initialized.." << std::endl;
 }
 
 
 PlayState::~PlayState() {
 	// Delete the levels
-	for (unsigned int i = 0; i < _levels.size(); i++) {
-		delete _levels[i];
+	for (unsigned int i = 0; i < m_levels.size(); i++) {
+		delete m_levels[i];
 	}
 }
 
 void PlayState::init() {
 	// Set up the shaders
-	initShaders();
+	loadShaders();
 
 	// Initialize our sprite batch
 	m_spriteBatch.init();
@@ -40,27 +39,24 @@ void PlayState::init() {
 	initLevel();
 }
 
-void PlayState::initShaders() {
-	// Compile the color shader
-	m_textureProgram.compileShaders("../assets/shaders/textureShading.vert", "../assets/shaders/textureShading.frag");
-	m_textureProgram.addAttribute("vertexPosition");
-	m_textureProgram.addAttribute("vertexColor");
-	m_textureProgram.addAttribute("vertexUV");
-	m_textureProgram.linkShaders();
+void PlayState::loadShaders() {
+	m_shaders.push_back(GEngine::Shader("../assets/shaders/textureShading.vert", GL_VERTEX_SHADER));
+	m_shaders.push_back(GEngine::Shader("../assets/shaders/textureShading.frag", GL_FRAGMENT_SHADER));
+	m_shaderProgram.addAttribute("vertexPosition");
+	m_shaderProgram.addAttribute("vertexColor");
+	m_shaderProgram.addAttribute("vertexUV");
+	m_shaderProgram.linkShaders(m_shaders);
 }
 
 void PlayState::initLevel() {
 	// Initialize level 1
-	if (m_currentLevel == 1) {
-		_levels.push_back(new Level("../assets/levels/level01.txt"));
-	}
-	else if (m_currentLevel == 2) {
-		_levels.push_back(new Level("../assets/levels/level02.txt"));
+	if (m_currentLevel == 0) {
+		m_levels.push_back(new Level("../assets/levels/level01.txt"));
 	}
 
 	// Initialize the player
 	m_player = new Player();
-	m_player->init(_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera);
+	m_player->init(m_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera);
 }
 
 void PlayState::processEvents() {
@@ -104,7 +100,7 @@ void PlayState::update(float deltaTime) {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
 	}
 
-	m_player->update(_levels[m_currentLevel]->_tiles, deltaTime);
+	m_player->update(m_levels[m_currentLevel]->_tiles, deltaTime);
 }
 
 void PlayState::updateCamera() {
@@ -120,17 +116,17 @@ void PlayState::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Enable shaders
-	m_textureProgram.use();
+	m_shaderProgram.enable();
 
 	glActiveTexture(GL_TEXTURE0);
 
 	// Make sure the shader uses texture 0
-	GLint textureUniform = m_textureProgram.getUniformLocation("mySampler");
+	GLint textureUniform = m_shaderProgram.getUniformLocation("mySampler");
 	glUniform1i(textureUniform, 0);
 
 	// Grab the camera matrix
 	glm::mat4 projectionMatrix = m_camera.getCameraMatrix();
-	GLint pUniform = m_textureProgram.getUniformLocation("P");
+	GLint pUniform = m_shaderProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
 	const glm::vec2 tileDimensions(64.0f);
@@ -139,9 +135,9 @@ void PlayState::draw() {
 	m_spriteBatch.begin();
 
 	// Draw tiles with camera culling
-	for (int i = 0; i < _levels[m_currentLevel]->_tiles.size(); i++) {
-		if (m_camera.isBoxInView(_levels[m_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
-			_levels[m_currentLevel]->_tiles[i]->draw(m_spriteBatch);
+	for (int i = 0; i < m_levels[m_currentLevel]->_tiles.size(); i++) {
+		if (m_camera.isBoxInView(m_levels[m_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
+			m_levels[m_currentLevel]->_tiles[i]->draw(m_spriteBatch);
 		}
 	}
 
@@ -155,7 +151,7 @@ void PlayState::draw() {
 	m_spriteBatch.renderBatch();
 
 	// Disable shaders
-	m_textureProgram.unuse();
+	m_shaderProgram.disable();
 
 	// Swap our buffer and draw everything to the screen!
 	m_window.swapBuffer();
