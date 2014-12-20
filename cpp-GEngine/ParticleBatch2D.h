@@ -34,7 +34,7 @@ namespace GEngine {
 
 		void draw(SpriteBatch* spriteBatch);
 
-		void addParticle(const glm::fvec2& position, const glm::fvec2& velocity, const GEngine::ColorRGBA8& color, float width);
+		void addParticle(float lifeTime, const glm::fvec2& position, const glm::fvec2& velocity, const GEngine::ColorRGBA8& color, float width);
 
 	private:
 		int findFreeParticle();

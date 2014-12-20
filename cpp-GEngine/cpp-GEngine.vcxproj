@@ -72,7 +72,9 @@
     <None Include="gEngine.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioEngine.h" />
+    <ClInclude Include="ParticleBatch2D.h" />
+    <ClInclude Include="ParticleEngine2D.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="GEngineErrors.h" />
     <ClInclude Include="GameState.h" />
@@ -95,7 +97,9 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AudioEngine.cpp" />
+    <ClCompile Include="ParticleBatch2D.cpp" />
+    <ClCompile Include="ParticleEngine2D.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="GEngineErrors.cpp" />
     <ClCompile Include="GameState.cpp" />

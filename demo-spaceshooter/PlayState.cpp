@@ -51,10 +51,20 @@ void PlayState::initLevel() {
 	m_player = new Player();
 	m_player->init(glm::fvec2(0, -(768 / 2)), &m_inputManager, &m_camera);
 
-	// Add the enemies
-	for (unsigned int i = 0; i < 10; i++) {
+	// Add the enemies, first row
+	for (unsigned int i = 0; i < 8; i++) {
 		m_enemies.push_back(new Enemy);
-		m_enemies.back()->init(GEngine::ResourceManager::getTexture("../assets/textures/pacified_enemy_104x104.png").id, glm::fvec2(0.0f, 0.0f), glm::fvec2(420.0f - (i * 70), 768 / 2 - 70), EnemyType::X_MOVING);
+		m_enemies.back()->init(GEngine::ResourceManager::getTexture("../assets/textures/pacified_enemy_104x104.png").id, glm::fvec2(0.0f, 0.0f), glm::fvec2(320.0f - (i * 100), 768 / 2 - 70), EnemyType::X_MOVING);
+	}
+	// Add the enemies, second row
+	for (unsigned int i = 0; i < 8; i++) {
+		m_enemies.push_back(new Enemy);
+		m_enemies.back()->init(GEngine::ResourceManager::getTexture("../assets/textures/pacified_enemy_104x104.png").id, glm::fvec2(0.0f, 0.0f), glm::fvec2(320.0f - (i * 100), 768 / 2 - 170), EnemyType::X_MOVING);
+	}
+	// Add the enemies, third row
+	for (unsigned int i = 0; i < 8; i++) {
+		m_enemies.push_back(new Enemy);
+		m_enemies.back()->init(GEngine::ResourceManager::getTexture("../assets/textures/pacified_enemy_104x104.png").id, glm::fvec2(0.0f, 0.0f), glm::fvec2(320.0f - (i * 100), 768 / 2 - 270), EnemyType::X_MOVING);
 	}
 }
 
@@ -103,6 +113,9 @@ void PlayState::update(float deltaTime) {
 
 	for (unsigned int i = 0; i < m_enemies.size(); i++) {
 		m_enemies[i]->update(m_player->projectiles, deltaTime);
+		if (m_enemies[i]->destroyed) {
+			m_enemies.erase(m_enemies.begin() + i);
+		}
 	}
 }
 

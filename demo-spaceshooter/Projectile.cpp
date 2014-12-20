@@ -29,7 +29,7 @@ void Projectile::applyCollisions(std::vector<Enemy*> enemies) {
 	for (unsigned int i = 0; i < enemies.size(); i++) {
 		if (collideWithEntity((int)width, (int)height, enemies[i])) {
 			destroyed = true;
-			enemies[i]->bubbled = true;
+			enemies[i]->destroyed = true;
 		}
 	}
 }

@@ -41,12 +41,12 @@ namespace GEngine {
 		}
 	}
 
-	void ParticleBatch2D::addParticle(const glm::fvec2& position, const glm::fvec2& velocity, const GEngine::ColorRGBA8& color, float width) {
+	void ParticleBatch2D::addParticle(float lifeTime, const glm::fvec2& position, const glm::fvec2& velocity, const GEngine::ColorRGBA8& color, float width) {
 		int particleIndex = findFreeParticle();
 
 		auto& p = m_particles[particleIndex];
 
-		p.m_life = 1.0f;
+		p.m_life = lifeTime;
 		p.m_position = position;
 		p.m_velocity = velocity;
 		p.m_color = color;
