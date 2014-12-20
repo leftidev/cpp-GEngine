@@ -17,10 +17,10 @@ Projectile::Projectile(glm::fvec2 speed, glm::vec2 pos) {
 Projectile::~Projectile() { }
 
 void Projectile::update(std::vector<Enemy*> enemies, float deltaTime) {
-	// Move on X-axis
+	// Move on Y-axis
 	m_position.y += m_speed.y * deltaTime;
 
-	// Check collisions on X-axis
+	// Check collisions
 	applyCollisions(enemies);
 }
 

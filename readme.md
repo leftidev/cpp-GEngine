@@ -1,5 +1,5 @@
 GEngine
-----------
+-------
 What?
 -----
 This repo contains GEngine - a C++, SDL2 and OpenGL 2D game engine and demos/experiments/projects I have made using the engine.
@@ -9,8 +9,16 @@ This repo contains GEngine - a C++, SDL2 and OpenGL 2D game engine and demos/exp
 - OpenGL is used for rendering graphics
 
 Demos:
----------
-demo-platformer: Very basic working 2D platformer demo.
+------
+- demo-platformer: Very basic 2D platformer demo.
+- demo-spaceshooter: Very basic 2D space shooter (read: Space Invaders) demo. NOTE: Under development
+
+TODO:
+-----
+- Add screenshots to readme.md
+- Get better textures for both demos
+- Finish demo-spaceshooter
+- Add better descriptions what the demos consist of to readme.md
 
 Other
 -----
