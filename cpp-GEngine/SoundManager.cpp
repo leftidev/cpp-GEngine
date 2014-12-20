@@ -1,5 +1,5 @@
 #include "GEngineErrors.h"
-#include "AudioEngine.h"
+#include "SoundManager.h"
 
 
 namespace GEngine {
@@ -27,13 +27,13 @@ namespace GEngine {
 		Mix_ResumeMusic();
 	}
 
-	AudioEngine::AudioEngine() { }
+	SoundManager::SoundManager() { }
 
-	AudioEngine::~AudioEngine() {
+	SoundManager::~SoundManager() {
 		destroy();
 	}
 
-	void AudioEngine::init() {
+	void SoundManager::init() {
 		if (m_isInitialized) {
 			fatalError("Tried to initialize AudioEngine twice!");
 		}
@@ -50,7 +50,7 @@ namespace GEngine {
 		m_isInitialized = true;
 	}
 
-	void AudioEngine::destroy() {
+	void SoundManager::destroy() {
 		if (m_isInitialized) {
 			m_isInitialized = false;
 
@@ -77,7 +77,7 @@ namespace GEngine {
 		}
 	}
 
-	SoundEffect AudioEngine::loadSoundEffect(const std::string& filePath) {
+	SoundEffect SoundManager::loadSoundEffect(const std::string& filePath) {
 		// Try to find the audio in the cache
 		auto it = m_effectMap.find(filePath);
 
@@ -102,7 +102,7 @@ namespace GEngine {
 		return effect;
 	}
 
-	Music AudioEngine::loadMusic(const std::string& filePath) {
+	Music SoundManager::loadMusic(const std::string& filePath) {
 		// Try to find the audio in the cache
 		auto it = m_musicMap.find(filePath);
 

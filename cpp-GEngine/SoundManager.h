@@ -9,7 +9,7 @@
 namespace GEngine {
 	class SoundEffect {
 	public:
-		friend class AudioEngine;
+		friend class SoundManager;
 
 		// Plays the effect file
 		// @param loops: If loops == -1, loop forever,
@@ -22,7 +22,7 @@ namespace GEngine {
 
 	class Music {
 	public:
-		friend class AudioEngine;
+		friend class SoundManager;
 
 		// Plays the music file
 		// @param loops: If loops == -1, loop forever,
@@ -36,10 +36,10 @@ namespace GEngine {
 		Mix_Music* m_music = nullptr;
 	};
 
-	class AudioEngine {
+	class SoundManager {
 	public:
-		AudioEngine();
-		~AudioEngine();
+		SoundManager();
+		~SoundManager();
 
 		void init();
 		void destroy();
