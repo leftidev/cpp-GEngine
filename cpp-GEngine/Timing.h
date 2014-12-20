@@ -14,22 +14,22 @@ namespace GEngine {
 		void unpause();
 
 		// Gets the timer's time
-		int get_ticks();
+		int getTicks();
 
 		// Checks the status of the timer
-		bool is_started();
-		bool is_paused();
+		bool isStarted();
+		bool isPaused();
 
 	private:
 		// The clock time when the timer started
-		int startTicks;
+		int m_startTicks;
 
 		// The ticks stored when the timer was paused
-		int pausedTicks;
+		int m_pausedTicks;
 
 		// The timer status
-		bool paused;
-		bool started;
+		bool m_paused;
+		bool m_started;
 	};
 
 	class FpsLimiter {

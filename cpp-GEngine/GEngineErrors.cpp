@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "Errors.h"
+#include "GEngineErrors.h"
 
 
 namespace GEngine {

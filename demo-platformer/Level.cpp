@@ -2,7 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-#include <cpp-GEngine/Errors.h>
+#include <cpp-GEngine/GEngineErrors.h>
 #include <cpp-GEngine/ResourceManager.h>
 
 #include "Level.h"

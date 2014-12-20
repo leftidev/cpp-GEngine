@@ -5,74 +5,74 @@
 
 namespace GEngine {
 	Timer::Timer() {
-		startTicks = 0;
-		pausedTicks = 0;
-		paused = false;
-		started = false;
+		m_startTicks = 0;
+		m_pausedTicks = 0;
+		m_paused = false;
+		m_started = false;
 	}
 
 	Timer::~Timer() { }
 
 	void Timer::start() {
 		// Start the timer
-		started = true;
+		m_started = true;
 
 		// Unpause the timer
-		paused = false;
+		m_paused = false;
 
 		// Get the current clock time
-		startTicks = SDL_GetTicks();
+		m_startTicks = SDL_GetTicks();
 	}
 
 	void Timer::stop() {
 		// Stop the timer
-		started = false;
+		m_started = false;
 
 		// Unpause the timer
-		paused = false;
+		m_paused = false;
 	}
 
 	void Timer::pause() {
 		// If the timer is running and isn't already paused
-		if ((started == true) && (paused == false))
+		if ((m_started == true) && (m_paused == false))
 		{
 			// Pause the timer
-			paused = true;
+			m_paused = true;
 
 			// Calculate the paused ticks
-			pausedTicks = SDL_GetTicks() - startTicks;
+			m_pausedTicks = SDL_GetTicks() - m_startTicks;
 		}
 	}
 
 	void Timer::unpause() {
 		// If the timer is paused
-		if (paused == true)
+		if (m_paused == true)
 		{
 			// Unpause the timer
-			paused = false;
+			m_paused = false;
 
 			// Reset the starting ticks
-			startTicks = SDL_GetTicks() - pausedTicks;
+			m_startTicks = SDL_GetTicks() - m_pausedTicks;
 
 			// Reset the paused ticks
-			pausedTicks = 0;
+			m_pausedTicks = 0;
 		}
 	}
 
-	int Timer::get_ticks() {
+	int Timer::getTicks() {
 		// If the timer is running
-		if (started == true)
+		if (m_started == true)
 		{
 			// If the timer is paused
-			if (paused == true)
+			if (m_paused == true)
 			{
 				// Return the number of ticks when the timer was paused
-				return pausedTicks;
+				return m_pausedTicks;
 			}
 			else
 			{
 				// Return the current time minus the start time
-				return SDL_GetTicks() - startTicks;
+				return SDL_GetTicks() - m_startTicks;
 			}
 		}
 
@@ -80,12 +80,12 @@ namespace GEngine {
 		return 0;
 	}
 
-	bool Timer::is_started() {
-		return started;
+	bool Timer::isStarted() {
+		return m_started;
 	}
 
-	bool Timer::is_paused() {
-		return paused;
+	bool Timer::isPaused() {
+		return m_paused;
 	}
 
 

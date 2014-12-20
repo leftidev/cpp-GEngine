@@ -72,8 +72,9 @@
     <None Include="gEngine.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="Errors.h" />
+    <ClInclude Include="GEngineErrors.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GEngine.h" />
     <ClInclude Include="GLTexture.h" />
@@ -94,8 +95,9 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="GEngineErrors.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GEngine.cpp" />
     <ClCompile Include="ImageLoader.cpp" />

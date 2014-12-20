@@ -1,7 +1,7 @@
 #include <fstream>
 #include <vector>
 
-#include "Errors.h"
+#include "GEngineErrors.h"
 #include "ShaderProgram.h"
 
 
