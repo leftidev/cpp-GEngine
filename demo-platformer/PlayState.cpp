@@ -37,6 +37,9 @@ void PlayState::init() {
 	m_camera.setScale(CAMERA_SCALE);
 
 	initLevel();
+
+	// Clear color to blue
+	glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
 }
 
 void PlayState::loadShaders() {
@@ -95,12 +98,6 @@ void PlayState::update(float deltaTime) {
 	if (m_inputManager.isKeyPressed(SDLK_RETURN)) {
 		// Restart the level
 		m_stateMachine.changeState(new PlayState(m_stateMachine, m_window, m_inputManager, m_currentLevel));
-	}
-	if (m_inputManager.isKeyPressed(SDLK_1)) {
-		glClearColor(1.f, 0.5f, 0.5f, 1.f);
-	}
-	if (m_inputManager.isKeyPressed(SDLK_2)) {
-		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
 	}
 
 	m_player->update(m_levels[m_currentLevel]->_tiles, deltaTime);

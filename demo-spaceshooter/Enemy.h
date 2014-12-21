@@ -25,12 +25,10 @@ public:
 	const float JUMP_SPEED = 24.0f;
 
 	bool destroyed = false;
-	bool bubbled = false;
 	bool inAir = true;			// Player falling
 	bool jumped = false;		// Player has jumped
 	bool normalGravity = true;	// Gravity direction
 	float gravityAcceleration = 0.80f; // Gravity velocity
-	int textureID2;
 
 	EnemyType type;
 };

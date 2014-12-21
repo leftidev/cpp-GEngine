@@ -1,0 +1,6 @@
+TEXTURE CREDITS:
+
+Available under the license: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) - http://creativecommons.org/licenses/by-sa/3.0/
+
+* "flea_spaceship.png" - by Tatermand. http://opengameart.org/content/space-game-art-pack-extended
+* "louse_spaceship.png" - by Tatermand. http://opengameart.org/content/space-game-art-pack-extended

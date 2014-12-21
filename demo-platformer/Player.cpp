@@ -12,7 +12,7 @@ Player::~Player() {
 }
 
 void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera) {
-    textureID = GEngine::ResourceManager::getTexture("../assets/textures/gizmo_52x52.png").id;
+    textureID = GEngine::ResourceManager::getTexture("../assets/textures/block_dude.png").id;
 
     width = 64.0f;
     height = 64.0f;
@@ -32,7 +32,7 @@ void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::
 
 void Player::update(std::vector<Tile*> tiles, float deltaTime) {
     // If player has not jumped and presses W
-    if (jumped == false && _inputManager->isKeyPressed(SDLK_w) == true) {
+	if (!jumped && (_inputManager->isKeyPressed(SDLK_w) || _inputManager->isKeyPressed(SDLK_UP) || _inputManager->isKeyPressed(SDLK_SPACE))) {
         jump();
     }
 
@@ -43,11 +43,11 @@ void Player::update(std::vector<Tile*> tiles, float deltaTime) {
     }
 
     // Move left
-    if (_inputManager->isKeyDown(SDLK_a)) {
+	if (_inputManager->isKeyDown(SDLK_a) || _inputManager->isKeyDown(SDLK_LEFT)) {
 		_speed.x = -MAX_SPEED;
     }
     // Move right
-    else if (_inputManager->isKeyDown(SDLK_d)) {
+	else if (_inputManager->isKeyDown(SDLK_d) || _inputManager->isKeyDown(SDLK_RIGHT)) {
 		_speed.x = MAX_SPEED;
     }
     else {

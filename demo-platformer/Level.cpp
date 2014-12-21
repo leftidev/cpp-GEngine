@@ -40,20 +40,9 @@ Level::Level(const std::string& fileName) {
 
             // Process the tile
             switch (tile) {
-                case 'B':
-                case 'R': {
+				case '#': {
                     Tile* temp = new Tile();
-                    temp->init(GEngine::ResourceManager::getTexture("../assets/textures/rock_block_52x52.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
-                    _tiles.push_back(temp);
-                } break;
-                case 'G': {
-                    Tile* temp = new Tile();
-                    temp->init(GEngine::ResourceManager::getTexture("../assets/textures/ice_block_52x52.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
-                    _tiles.push_back(temp);
-                } break;
-                case 'L': {
-                    Tile* temp = new Tile();
-                    temp->init(GEngine::ResourceManager::getTexture("../assets/textures/grass_block_52x52.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+                    temp->init(GEngine::ResourceManager::getTexture("../assets/textures/black_tile.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
                     _tiles.push_back(temp);
                 } break;
                 case '@':
