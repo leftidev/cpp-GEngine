@@ -10,13 +10,13 @@ Player::Player() { }
 Player::~Player() { }
 
 void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera) {
-    m_textureID = GEngine::ResourceManager::getTexture("../assets/textures/flea_spaceship.png").id;
+    m_textureID = GEngine::ResourceManager::getTexture("../assets/textures/block_dude.png").id;
 
-    width = 48.0f;
-    height = 41.0f;
+    width = 64.0f;
+	height = 64.0f;
 
-    m_speed.x = 0.0f;
-    m_speed.y = 0.0f;
+    m_speed.x = 5.0f;
+    m_speed.y = 5.0f;
 
     m_position = pos;
     m_inputManager = inputManager;
@@ -29,29 +29,18 @@ void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::
 }
 
 void Player::update(float deltaTime) {
-    // Move left
-	if (m_inputManager->isKeyDown(SDLK_a) || m_inputManager->isKeyDown(SDLK_LEFT)) {
-		m_speed.x = -MAX_VELOCITY;
-    }
-    // Move right
-	else if (m_inputManager->isKeyDown(SDLK_d) || m_inputManager->isKeyDown(SDLK_RIGHT)) {
-		m_speed.x = MAX_VELOCITY;
-    }
-    else {
-        m_speed.x = 0.0f;
-    }
-
-    // Move on Y-axis
-    m_position.y += m_speed.y * deltaTime;
-
-    // Check collision on Y-axis
-	collide(glm::fvec2(0.0f, m_speed.y));
-
-    // Move on X-axis
-    m_position.x += m_speed.x * deltaTime;
-
-    // Check collision on X-axis
-	collide(glm::fvec2(m_speed.x, 0.0f));
+	if (m_inputManager->isKeyDown(SDLK_w)) {
+		m_position.y += m_speed.y * deltaTime;
+	}
+	else if (m_inputManager->isKeyDown(SDLK_s)) {
+		m_position.y -= m_speed.y * deltaTime;
+	}
+	if (m_inputManager->isKeyDown(SDLK_a)) {
+		m_position.x -= m_speed.x * deltaTime;
+	}
+	else if (m_inputManager->isKeyDown(SDLK_d)) {
+		m_position.x += m_speed.x * deltaTime;
+	}
 }
 
 // Collisions

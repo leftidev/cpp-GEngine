@@ -13,9 +13,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo-spaceshooter", "demo-spaceshooter\demo-spaceshooter.vcxproj", "{7B79C18E-7CEB-4D82-9EFB-6255E97F8AA2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo-topdown", "demo-topdown\demo-topdown.vcxproj", "{DC87C418-5C87-46FE-9914-A064D7FEB7E1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{53AA18C2-D5DE-47C4-8B46-F7FA7D8220E2} = {53AA18C2-D5DE-47C4-8B46-F7FA7D8220E2}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
