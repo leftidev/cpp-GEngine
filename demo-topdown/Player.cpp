@@ -15,8 +15,8 @@ void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::
     width = 64.0f;
 	height = 64.0f;
 
-    m_speed.x = 5.0f;
-    m_speed.y = 5.0f;
+    m_speed.x = 12.0f;
+    m_speed.y = 12.0f;
 
     m_position = pos;
     m_inputManager = inputManager;

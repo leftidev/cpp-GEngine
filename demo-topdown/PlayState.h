@@ -7,6 +7,8 @@
 #include <cpp-GEngine/ShaderProgram.h>
 
 #include "Player.h"
+#include "Tile.h"
+#include "Level.h"
 
 
 class StateManager;
@@ -27,6 +29,7 @@ private:
 	GEngine::SpriteBatch m_spriteBatch; // Draws all sprites
 	GEngine::ShaderProgram m_shaderProgram; // The shader program
 	std::vector<GEngine::Shader> m_shaders;
+	std::vector<Level*> m_levels; // vector of all levels
 
 	Player* m_player = nullptr;
 	int m_currentLevel = 0;

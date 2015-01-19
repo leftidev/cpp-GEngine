@@ -28,10 +28,13 @@ void PlayState::init() {
 	m_camera.init(1024, 768);
 
 	// Zoom out the camera by 2x
-	const float CAMERA_SCALE = 1.0f;
+	const float CAMERA_SCALE = 1.0f / 2.0f;
 	m_camera.setScale(CAMERA_SCALE);
 
 	initLevel();
+
+	// Clear color to blue
+	glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
 }
 
 void PlayState::loadShaders() {
@@ -47,9 +50,14 @@ void PlayState::loadShaders() {
 }
 
 void PlayState::initLevel() {
+	// Initialize level 1
+	if (m_currentLevel == 0) {
+		m_levels.push_back(new Level("../assets/levels/level01.txt"));
+	}
+
 	// Initialize the player
 	m_player = new Player();
-	m_player->init(glm::fvec2(0, -(768 / 2) + 50), &m_inputManager, &m_camera);
+	m_player->init(m_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera);
 }
 
 void PlayState::processEvents() {
@@ -97,6 +105,8 @@ void PlayState::update(float deltaTime) {
 }
 
 void PlayState::updateCamera() {
+	// Make sure the camera is bound to the player position
+	m_camera.setPosition(m_player->getPosition());
 	m_camera.update();
 }
 
@@ -120,10 +130,17 @@ void PlayState::draw() {
 	GLint pUniform = m_shaderProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-	const glm::vec2 enemyDimensions(48.0f);
+	const glm::vec2 tileDimensions(64.0f);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	// Begin drawing
 	m_spriteBatch.begin();
+
+	// Draw tiles with camera culling
+	for (int i = 0; i < m_levels[m_currentLevel]->_tiles.size(); i++) {
+		if (m_camera.isBoxInView(m_levels[m_currentLevel]->_tiles[i]->getPosition(), tileDimensions)) {
+			m_levels[m_currentLevel]->_tiles[i]->draw(m_spriteBatch);
+		}
+	}
 
 	// Draw player
 	m_player->draw(m_spriteBatch);

@@ -67,8 +67,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.props" />
@@ -76,9 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
