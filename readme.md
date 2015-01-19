@@ -10,12 +10,12 @@ This repo contains GEngine - a C++, SDL2 and OpenGL 2D game engine and demos/exp
 
 Demos:
 ------
-- demo-platformer: Very basic 2D platformer demo
-- demo-spaceshooter: Very basic 2D space shooter (read: Space Invaders) demo. NOTE: Under development
+- demo-platformer: Basic 2D platformer demo
+- demo-spaceshooter: Basic 2D space shooter (read: Space Invaders) demo
+- demo-topdown: Basic 2D top-down action demo. NOTE: Under development
 
 TODO:
 -----
-- Finish demo-spaceshooter
 - Add better descriptions what the demos consist of to readme.md
 
 Other
@@ -27,9 +27,7 @@ GEngine uses code from "Bengine". (The game engine created in Ben Arnold's YouTu
 Screenshots
 -----------
 demo-platformer:
----------------
 ![alt tag](https://cloud.githubusercontent.com/assets/5671281/5518315/b3b5c998-8929-11e4-9b79-64b285dcf871.png)
 
 demo-spaceshooter:
-------------------
 ![alt tag](https://cloud.githubusercontent.com/assets/5671281/5518316/b6732bc6-8929-11e4-92f2-f4c7ab9ee4ed.png)
