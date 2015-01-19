@@ -46,6 +46,7 @@ Level::Level(const std::string& fileName) {
                     _tiles.push_back(temp);
                 } break;
                 case '@':
+					_levelData[y][x] = '.'; /// So we dont collide with a @
                     _startPlayerPos.x = x * TILE_WIDTH;
                     _startPlayerPos.y = y * TILE_WIDTH;
                     break;

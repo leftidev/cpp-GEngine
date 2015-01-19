@@ -101,7 +101,7 @@ void PlayState::update(float deltaTime) {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
 	}
 
-	m_player->update(deltaTime);
+	m_player->update(m_levels[m_currentLevel]->getLevelData(), deltaTime);
 }
 
 void PlayState::updateCamera() {
