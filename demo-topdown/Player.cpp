@@ -6,20 +6,20 @@
 #include "Player.h"
 
 
-const float TILE_WIDTH = 64.0f;
+const float TILE_WIDTH = 32.0f;
 
 Player::Player() { }
 
 Player::~Player() { }
 
 void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera) {
-    m_textureID = GEngine::ResourceManager::getTexture("../assets/textures/block_dude.png").id;
+    m_textureID = GEngine::ResourceManager::getTexture("../assets/textures/topdown_dude.png").id;
 
-    width = 64.0f;
-	height = 64.0f;
+    width = 32.0f;
+	height = 18.0f;
 
-    m_speed.x = 12.0f;
-    m_speed.y = 12.0f;
+    m_speed.x = 8.0f;
+    m_speed.y = 8.0f;
 
     m_position = pos;
     m_inputManager = inputManager;
@@ -114,16 +114,17 @@ void Player::collideWithTile(glm::vec2 tilePos) {
 
 	const float TILE_RADIUS = (float)TILE_WIDTH / 2.0f;
 	// The minimum distance before a collision occurs
-	const float MIN_DISTANCE = width / 2 + TILE_RADIUS;
+	const float MIN_DISTANCE_X = width / 2.0f + TILE_RADIUS;
+	const float MIN_DISTANCE_Y = height / 2.0f + TILE_RADIUS;
 
 	// Center position of the agent
-	glm::vec2 centerAgentPos = m_position + glm::vec2(width / 2);
+	glm::vec2 centerAgentPos = m_position + glm::vec2(width / 2, height / 2);
 	// Vector from the agent to the tile
 	glm::vec2 distVec = centerAgentPos - tilePos;
 
 	// Get the depth of the collision
-	float xDepth = MIN_DISTANCE - abs(distVec.x);
-	float yDepth = MIN_DISTANCE - abs(distVec.y);
+	float xDepth = MIN_DISTANCE_X - abs(distVec.x);
+	float yDepth = MIN_DISTANCE_Y - abs(distVec.y);
 
 	// If both the depths are > 0, then we collided
 	if (xDepth > 0 && yDepth > 0) {

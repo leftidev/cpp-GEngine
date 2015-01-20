@@ -8,7 +8,7 @@
 #include "Tile.h"
 
 
-const int TILE_WIDTH = 64;
+const int TILE_WIDTH = 32;
 
 class Level {
 public:
