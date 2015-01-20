@@ -45,6 +45,13 @@ void Player::update(const std::vector<std::string>& levelData, float deltaTime) 
 		m_position.x += m_speed.x * deltaTime;
 	}
 
+	glm::vec2 mouseCoords = m_inputManager->getMouseCoords();
+	mouseCoords = m_camera->convertScreenToWorld(mouseCoords);
+
+	glm::vec2 centerPosition = m_position + glm::vec2(width / 2, height / 2);
+
+	m_direction = glm::normalize(mouseCoords - centerPosition);
+
 	collideWithLevel(levelData);
 }
 

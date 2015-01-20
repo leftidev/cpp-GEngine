@@ -17,7 +17,7 @@ void Entity::draw(GEngine::SpriteBatch& spriteBatch) {
     destRect.z = width;
     destRect.w = height;
 
-    spriteBatch.draw(destRect, uvRect, m_textureID, 0.0f, m_color);
+    spriteBatch.draw(destRect, uvRect, m_textureID, 0.0f, m_color, m_direction);
 }
 
 // AABB (Axis Aligned Bounding Box) collision

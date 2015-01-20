@@ -25,6 +25,7 @@ protected:
     int m_textureID;
 
     glm::fvec2 m_position;
+	glm::vec2 m_direction = glm::vec2(1.0f, 0.0f);
     GEngine::ColorRGBA8 m_color;
     glm::fvec2 m_speed;
 };
