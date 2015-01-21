@@ -21,5 +21,6 @@ Modified by myself with Paint.net
 * "Dungeon_Floor_2.png"
 * "soldier_torso_1h.png"
 * "soldier_legs_0004.png"
+* "zombie_move_0002.png"
 
 Everything else made by me. Free to use however you want.
