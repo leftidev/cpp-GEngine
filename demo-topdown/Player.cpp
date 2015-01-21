@@ -6,17 +6,18 @@
 #include "Player.h"
 
 
-const float TILE_WIDTH = 32.0f;
+const float TILE_WIDTH = 64.0f;
 
 Player::Player() { }
 
 Player::~Player() { }
 
 void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera) {
-    m_textureID = GEngine::ResourceManager::getTexture("../assets/textures/topdown_dude.png").id;
+    m_textureID = GEngine::ResourceManager::getTexture("../assets/textures/soldier_torso_1h.png").id;
+	//m_textureID2 = GEngine::ResourceManager::getTexture("../assets/textures/soldier_legs_0004.png").id;
 
-    width = 32.0f;
-	height = 18.0f;
+    width = 64.0f;
+	height = 64.0f;
 
     m_speed.x = 8.0f;
     m_speed.y = 8.0f;
@@ -29,6 +30,25 @@ void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::
     m_color.g = 255;
     m_color.b = 255;
     m_color.a = 255;
+}
+
+void Player::draw(GEngine::SpriteBatch& spriteBatch) {
+	const glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
+
+	glm::vec4 destRect;
+	destRect.x = m_position.x;
+	destRect.y = m_position.y;
+	destRect.z = width;
+	destRect.w = height;
+	spriteBatch.draw(destRect, uvRect, m_textureID, 0.0f, m_color, m_direction);
+
+	// Debug bounding box drawing
+	glm::vec4 aabbRect;
+	aabbRect.x = m_position.x + 16.0f;
+	aabbRect.y = m_position.y + 16.0f;
+	aabbRect.z = width - 32.0f;
+	aabbRect.w = height - 32.0f;
+	spriteBatch.draw(aabbRect, uvRect, m_debugTextureID, 0.0f, m_color);
 }
 
 void Player::update(const std::vector<std::string>& levelData, float deltaTime) {
@@ -121,11 +141,11 @@ void Player::collideWithTile(glm::vec2 tilePos) {
 
 	const float TILE_RADIUS = (float)TILE_WIDTH / 2.0f;
 	// The minimum distance before a collision occurs
-	const float MIN_DISTANCE_X = width / 2.0f + TILE_RADIUS;
-	const float MIN_DISTANCE_Y = height / 2.0f + TILE_RADIUS;
+	const float MIN_DISTANCE_X = (width - 32.0f) / 2.0f + TILE_RADIUS;
+	const float MIN_DISTANCE_Y = (height - 32.0f) / 2.0f + TILE_RADIUS;
 
 	// Center position of the agent
-	glm::vec2 centerAgentPos = m_position + glm::vec2(width / 2, height / 2);
+	glm::vec2 centerAgentPos = glm::vec2(m_position.x + 16.0f, m_position.y + 16.0f) + glm::vec2((width - 32.0f) / 2, (height - 32.0f) / 2);
 	// Vector from the agent to the tile
 	glm::vec2 distVec = centerAgentPos - tilePos;
 

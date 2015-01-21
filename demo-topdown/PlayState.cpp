@@ -28,13 +28,13 @@ void PlayState::init() {
 	m_camera.init(1024, 768);
 
 	// Zoom out the camera by 2x
-	const float CAMERA_SCALE = 1.0f;
+	const float CAMERA_SCALE = 1.5f;
 	m_camera.setScale(CAMERA_SCALE);
 
 	initLevel();
 
 	// Clear color to blue
-	glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 void PlayState::loadShaders() {
@@ -130,7 +130,7 @@ void PlayState::draw() {
 	GLint pUniform = m_shaderProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-	const glm::vec2 tileDimensions(32.0f);
+	const glm::vec2 tileDimensions(64.0f);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	// Begin drawing
 	m_spriteBatch.begin();

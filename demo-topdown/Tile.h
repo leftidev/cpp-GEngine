@@ -9,5 +9,7 @@ public:
     ~Tile();
 
     void init(int TextureID, glm::vec2 pos);
+
+	void draw(GEngine::SpriteBatch& spriteBatch);
 };
 
