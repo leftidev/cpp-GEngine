@@ -12,7 +12,7 @@ Demos:
 ------
 - demo-platformer: Basic 2D platformer demo
 - demo-spaceshooter: Basic 2D space shooter (read: Space Invaders) demo
-- demo-topdown: Basic 2D top-down action demo. NOTE: Under development
+- demo-topdown: Basic 2D top-down shooter demo. NOTE: Under development
 
 TODO:
 -----

@@ -1,6 +1,25 @@
 TEXTURE CREDITS:
 
+THANKS !
+
 Available under the license: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) - http://creativecommons.org/licenses/by-sa/3.0/
 
 * "flea_spaceship.png" - by Tatermand. http://opengameart.org/content/space-game-art-pack-extended
 * "louse_spaceship.png" - by Tatermand. http://opengameart.org/content/space-game-art-pack-extended
+
+And from www.bigrookgames.com - http://www.reddit.com/r/gamedev/comments/2rw8ya/1000_free_2d_sprites_animations_tiles_and_effects/
+
+Modified by myself with Paint.net
+
+* "Dungeon_Walls_01.png"
+* "Dungeon_Walls_02.png"
+* "Dungeon_Walls_03.png"
+* "Dungeon_Walls_04.png"
+* "Dungeon_Walls_05.png"
+* "Dungeon_Walls_06.png"
+* "Dungeon_Floor_1.png"
+* "Dungeon_Floor_2.png"
+* "soldier_torso_1h.png"
+* "soldier_legs_0004.png"
+
+Everything else made by me. Free to use however you want.
