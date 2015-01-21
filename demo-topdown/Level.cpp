@@ -42,16 +42,51 @@ Level::Level(const std::string& fileName) {
             switch (tile) {
 				case '#': {
                     Tile* temp = new Tile();
-                    temp->init(GEngine::ResourceManager::getTexture("../assets/textures/black_tile.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+                    temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Walls_01.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
                     _tiles.push_back(temp);
                 } break;
+				case '=': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Walls_02.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+				} break;
+				case '1': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Walls_03.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+				} break;
+				case '2': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Walls_04.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+				} break;
+				case '3': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Walls_05.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+				} break;
+				case '4': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Walls_06.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+				} break;
+				case '.': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Floor_2.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+				} break;
+				case ',': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Floor_2.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+				} break;
                 case '@':
-					_levelData[y][x] = '.'; /// So we dont collide with a @
+					_levelData[y][x] = '5'; /// So we dont collide with a @
                     _startPlayerPos.x = x * TILE_WIDTH;
                     _startPlayerPos.y = y * TILE_WIDTH;
                     break;
-                case '.':
-                    break;
+				case '5':
+					break;
                 default:
                     std::printf("Unexpected symbol %c at (%d,%d)", tile, x, y);
                     break;

@@ -28,13 +28,13 @@ void PlayState::init() {
 	m_camera.init(1024, 768);
 
 	// Zoom out the camera by 2x
-	const float CAMERA_SCALE = 1.5f;
+	const float CAMERA_SCALE = 1.0f;
 	m_camera.setScale(CAMERA_SCALE);
 
 	initLevel();
 
 	// Clear color to blue
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 void PlayState::loadShaders() {
