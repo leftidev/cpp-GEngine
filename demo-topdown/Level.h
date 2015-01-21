@@ -24,6 +24,9 @@ public:
     const std::vector<std::string>& getLevelData() const { return _levelData; }
     glm::vec2 getStartPlayerPos() const { return _startPlayerPos; }
 
+	std::vector<GLuint> enemyTextureIDs;
+	std::vector<glm::vec2> enemyStartPositions;
+
     std::vector<Tile*> _tiles;
 
 private:

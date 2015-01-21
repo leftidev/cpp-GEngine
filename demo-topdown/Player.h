@@ -14,13 +14,7 @@ public:
 	void init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera);
 	void draw(GEngine::SpriteBatch& spriteBatch);
 	void update(const std::vector<std::string>& levelData, float deltaTime);
-	bool collideWithLevel(const std::vector<std::string>& levelData);
-	void checkTilePosition(const std::vector<std::string>& levelData,
-		std::vector<glm::vec2>& collideTilePositions,
-		float x,
-		float y);
 
-	void collideWithTile(glm::vec2 tilePos);
 private:
 	const float MAX_VELOCITY = 10.0f;
 	const int PROJECTILE_REACH = 1000;

@@ -16,6 +16,14 @@ public:
 
     glm::fvec2 getPosition() const { return m_position; }
 
+	bool collideWithLevel(const std::vector<std::string>& levelData);
+	void checkTilePosition(const std::vector<std::string>& levelData,
+		std::vector<glm::vec2>& collideTilePositions,
+		float x,
+		float y);
+
+	void collideWithTile(glm::vec2 tilePos);
+
     float width;
     float height;
 

@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Tile.h"
 #include "Level.h"
+#include "Enemy.h"
 
 
 class StateManager;
@@ -30,6 +31,8 @@ private:
 	GEngine::ShaderProgram m_shaderProgram; // The shader program
 	std::vector<GEngine::Shader> m_shaders;
 	std::vector<Level*> m_levels; // vector of all levels
+
+	std::vector<Enemy*> m_enemies; // All enemies
 
 	Player* m_player = nullptr;
 	int m_currentLevel = 0;

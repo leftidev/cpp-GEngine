@@ -58,6 +58,14 @@ void PlayState::initLevel() {
 	// Initialize the player
 	m_player = new Player();
 	m_player->init(m_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera);
+
+	// Add the enemies
+	const std::vector<glm::vec2>& enemyPositions = m_levels[m_currentLevel]->enemyStartPositions;
+	const std::vector<GLuint>& enemyTextureIDs = m_levels[m_currentLevel]->enemyTextureIDs;
+	for (unsigned int i = 0; i < enemyPositions.size(); i++) {
+		m_enemies.push_back(new Enemy);
+		m_enemies.back()->init(enemyTextureIDs[i], enemyPositions[i]);
+	}
 }
 
 void PlayState::processEvents() {
@@ -102,6 +110,11 @@ void PlayState::update(float deltaTime) {
 	}
 
 	m_player->update(m_levels[m_currentLevel]->getLevelData(), deltaTime);
+
+	// Update the zombies
+	for (int i = 0; i < m_enemies.size(); i++) {
+		m_enemies[i]->update(m_levels[m_currentLevel]->getLevelData(), m_player, deltaTime);
+	}
 }
 
 void PlayState::updateCamera() {
@@ -144,6 +157,13 @@ void PlayState::draw() {
 
 	// Draw player
 	m_player->draw(m_spriteBatch);
+
+	// Draw the zombies
+	for (int i = 0; i < m_enemies.size(); i++) {
+		if (m_camera.isBoxInView(m_enemies[i]->getPosition(), tileDimensions)) {
+			m_enemies[i]->draw(m_spriteBatch);
+		}
+	}
 
 	// End sprite batch creation
 	m_spriteBatch.end();

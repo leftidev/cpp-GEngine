@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
@@ -77,6 +78,7 @@
     <None Include="Release.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
