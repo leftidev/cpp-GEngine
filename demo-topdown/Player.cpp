@@ -14,7 +14,7 @@ Player::~Player() { }
 
 void Player::init(glm::fvec2 pos, GEngine::InputManager* inputManager, GEngine::Camera2D* camera) {
     m_textureID = GEngine::ResourceManager::getTexture("../assets/textures/soldier_torso_1h.png").id;
-	//m_textureID2 = GEngine::ResourceManager::getTexture("../assets/textures/soldier_legs_0004.png").id;
+	m_textureID2 = GEngine::ResourceManager::getTexture("../assets/textures/soldier_legs_0004.png").id;
 
     width = 64.0f;
 	height = 64.0f;
@@ -40,15 +40,18 @@ void Player::draw(GEngine::SpriteBatch& spriteBatch) {
 	destRect.y = m_position.y;
 	destRect.z = width;
 	destRect.w = height;
-	spriteBatch.draw(destRect, uvRect, m_textureID, 0.0f, m_color, m_direction);
+	spriteBatch.draw(destRect, uvRect, m_textureID, 0.5f, m_color, m_direction);
+	spriteBatch.draw(destRect, uvRect, m_textureID2, 0.0f, m_color, m_direction);
 
 	// Debug bounding box drawing
+	
 	glm::vec4 aabbRect;
 	aabbRect.x = m_position.x + 16.0f;
 	aabbRect.y = m_position.y + 16.0f;
 	aabbRect.z = width - 32.0f;
 	aabbRect.w = height - 32.0f;
-	spriteBatch.draw(aabbRect, uvRect, m_debugTextureID, 0.0f, m_color);
+	spriteBatch.draw(aabbRect, uvRect, m_debugTextureID, 1.0f, m_color);
+	
 }
 
 void Player::update(const std::vector<std::string>& levelData, float deltaTime) {

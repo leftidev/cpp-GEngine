@@ -24,6 +24,7 @@ public:
 	void processEvents() override;
 	void update(float deltaTime) override;
 	void updateCamera() override;
+	void updateEntities(float deltaTime);
 	void draw() override;
 
 private:

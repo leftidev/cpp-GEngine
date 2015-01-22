@@ -27,13 +27,14 @@ public:
     float width;
     float height;
 
+	glm::fvec2 m_position;
 protected:
 	bool collideWithEntity(int width, int height, Entity* entity);
 
     GLuint m_textureID;
 	GLuint m_debugTextureID = GEngine::ResourceManager::getTexture("../assets/textures/aabb.png").id;
 
-    glm::fvec2 m_position;
+
 	glm::vec2 m_direction = glm::vec2(1.0f, 0.0f);
     GEngine::ColorRGBA8 m_color;
     glm::fvec2 m_speed;

@@ -40,6 +40,6 @@ void Tile::draw(GEngine::SpriteBatch& spriteBatch) {
 	aabbRect.y = m_position.y;
 	aabbRect.z = width;
 	aabbRect.w = height;
-	spriteBatch.draw(aabbRect, uvRect, m_debugTextureID, 0.0f, m_color);
+	spriteBatch.draw(aabbRect, uvRect, m_debugTextureID, 1.0f, m_color);
 	*/
 }

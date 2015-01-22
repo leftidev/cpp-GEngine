@@ -28,7 +28,7 @@ void PlayState::init() {
 	m_camera.init(1024, 768);
 
 	// Zoom out the camera by 2x
-	const float CAMERA_SCALE = 1.0f;
+	const float CAMERA_SCALE = 1.5f;
 	m_camera.setScale(CAMERA_SCALE);
 
 	initLevel();
@@ -109,18 +109,35 @@ void PlayState::update(float deltaTime) {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.f);
 	}
 
-	m_player->update(m_levels[m_currentLevel]->getLevelData(), deltaTime);
-
-	// Update the zombies
-	for (int i = 0; i < m_enemies.size(); i++) {
-		m_enemies[i]->update(m_levels[m_currentLevel]->getLevelData(), m_player, deltaTime);
-	}
+	updateEntities(deltaTime);
 }
 
 void PlayState::updateCamera() {
 	// Make sure the camera is bound to the player position
 	m_camera.setPosition(m_player->getPosition());
 	m_camera.update();
+}
+
+void PlayState::updateEntities(float deltaTime) {
+	m_player->update(m_levels[m_currentLevel]->getLevelData(), deltaTime);
+
+	// Update all enemies
+	for (int i = 0; i < m_enemies.size(); i++) {
+		m_enemies[i]->update(m_levels[m_currentLevel]->getLevelData(), m_player, deltaTime);
+	}
+
+	// Update Zombie collisions
+	for (int i = 0; i < m_enemies.size(); i++) {
+		// Collide with other zombies
+		for (int j = i + 1; j < m_enemies.size(); j++) {
+			m_enemies[i]->collideWithEntity(m_enemies[j]);
+		}
+
+		// Collide with player
+		if (m_enemies[i]->collideWithEntity(m_player)) {
+			std::cout << "Enemy hits player!" << std::endl;
+		}
+	}
 }
 
 void PlayState::draw() {
@@ -146,7 +163,7 @@ void PlayState::draw() {
 	const glm::vec2 tileDimensions(64.0f);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	// Begin drawing
-	m_spriteBatch.begin();
+	m_spriteBatch.begin(GEngine::GlyphSortType::FRONT_TO_BACK);
 
 	// Draw tiles with camera culling
 	for (int i = 0; i < m_levels[m_currentLevel]->_tiles.size(); i++) {
