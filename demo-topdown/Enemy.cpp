@@ -31,14 +31,14 @@ void Enemy::draw(GEngine::SpriteBatch& spriteBatch) {
 	spriteBatch.draw(destRect, uvRect, m_textureID, 0.0f, m_color, m_direction);
 
 	// Debug bounding box drawing
-	
+	/*
 	glm::vec4 aabbRect;
 	aabbRect.x = m_position.x + 16.0f;
 	aabbRect.y = m_position.y + 16.0f;
 	aabbRect.z = width - 32.0f;
 	aabbRect.w = height - 32.0f;
 	spriteBatch.draw(aabbRect, uvRect, m_debugTextureID, 1.0f, m_color);
-	
+	*/
 }
 
 void Enemy::update(const std::vector<std::string>& levelData, Player* player, float deltaTime) {

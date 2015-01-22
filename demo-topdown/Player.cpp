@@ -44,14 +44,14 @@ void Player::draw(GEngine::SpriteBatch& spriteBatch) {
 	spriteBatch.draw(destRect, uvRect, m_textureID2, 0.0f, m_color, m_direction);
 
 	// Debug bounding box drawing
-	
+	/*
 	glm::vec4 aabbRect;
 	aabbRect.x = m_position.x + 16.0f;
 	aabbRect.y = m_position.y + 16.0f;
 	aabbRect.z = width - 32.0f;
 	aabbRect.w = height - 32.0f;
 	spriteBatch.draw(aabbRect, uvRect, m_debugTextureID, 1.0f, m_color);
-	
+	*/
 }
 
 void Player::update(const std::vector<std::string>& levelData, float deltaTime) {

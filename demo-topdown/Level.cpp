@@ -81,16 +81,24 @@ Level::Level(const std::string& fileName) {
 					_tiles.push_back(temp);
 				} break;
 				case 'Z': {
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Floor_2.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+
+					_levelData[y][x] = '.'; /// So we dont collide with Entities
+
 					enemyTextureIDs.emplace_back(GEngine::ResourceManager::getTexture("../assets/textures/zombie_move_0002.png").id);
 					enemyStartPositions.emplace_back(x * TILE_WIDTH, y * TILE_WIDTH);
 				} break;
 				case '@': {
-					_levelData[y][x] = '5'; /// So we dont collide with a @
+					Tile* temp = new Tile();
+					temp->init(GEngine::ResourceManager::getTexture("../assets/textures/Dungeon_Floor_2.png").id, glm::fvec2(x * TILE_WIDTH, y * TILE_WIDTH));
+					_tiles.push_back(temp);
+
+					_levelData[y][x] = '.'; /// So we dont collide with Entities
 					_startPlayerPos.x = x * TILE_WIDTH;
 					_startPlayerPos.y = y * TILE_WIDTH;
 				} break;
-				case '5':
-					break;
                 default:
                     std::printf("Unexpected symbol %c at (%d,%d)", tile, x, y);
                     break;
