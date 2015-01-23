@@ -23,13 +23,14 @@ public:
 		float y);
 
 	void collideWithTile(glm::vec2 tilePos);
-
+	bool collideWithEntity(Entity* entity);
+	bool collideWithEnemy(int width, int height, Entity* entity);
     float width;
     float height;
 
 	glm::fvec2 m_position;
 protected:
-	bool collideWithEntity(int width, int height, Entity* entity);
+
 
     GLuint m_textureID;
 	GLuint m_debugTextureID = GEngine::ResourceManager::getTexture("../assets/textures/aabb.png").id;

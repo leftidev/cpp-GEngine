@@ -25,6 +25,7 @@ public:
 	void update(float deltaTime) override;
 	void updateCamera() override;
 	void updateEntities(float deltaTime);
+	void updateBullets(float deltaTime);
 	void draw() override;
 
 private:
@@ -34,6 +35,8 @@ private:
 	std::vector<Level*> m_levels; // vector of all levels
 
 	std::vector<Enemy*> m_enemies; // All enemies
+
+	std::vector<Projectile> m_projectiles;
 
 	Player* m_player = nullptr;
 	int m_currentLevel = 0;

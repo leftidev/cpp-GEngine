@@ -110,6 +110,7 @@ void PlayState::update(float deltaTime) {
 	}
 
 	updateEntities(deltaTime);
+	updateBullets(deltaTime);
 }
 
 void PlayState::updateCamera() {
@@ -119,7 +120,7 @@ void PlayState::updateCamera() {
 }
 
 void PlayState::updateEntities(float deltaTime) {
-	m_player->update(m_levels[m_currentLevel]->getLevelData(), deltaTime);
+	m_player->update(m_levels[m_currentLevel]->getLevelData(), m_projectiles, deltaTime);
 
 	// Update all enemies
 	for (int i = 0; i < m_enemies.size(); i++) {
@@ -136,6 +137,37 @@ void PlayState::updateEntities(float deltaTime) {
 		// Collide with player
 		if (m_enemies[i]->collideWithEntity(m_player)) {
 			std::cout << "Enemy hits player!" << std::endl;
+		}
+
+		// Collide with player
+		if (m_enemies[i]->collideWithEntity(m_player)) {
+			std::cout << "Enemy hits player!" << std::endl;
+		}
+
+		// Projectile hits 
+		if (m_enemies[i]->destroyed) {
+			m_enemies.erase(m_enemies.begin() + i);
+		}
+	}
+}
+
+void PlayState::updateBullets(float deltaTime) {
+	// Update projectiles
+	for (unsigned int i = 0; i < m_projectiles.size(); i++) {
+		m_projectiles[i].update(m_levels[m_currentLevel]->getLevelData(), deltaTime);
+
+		// Update Zombie collisions
+		for (unsigned int j = 0; j < m_enemies.size(); j++) {
+			// Collide with player
+			if (m_projectiles[i].collideWithEnemy(m_projectiles[i].width, m_projectiles[i].height, m_enemies[j])) {
+				m_projectiles[i].destroyed = true;
+				m_enemies[j]->destroyed = true;
+			}
+		}
+
+		// Projectile hits 
+		if (m_projectiles[i].destroyed) {
+			m_projectiles.erase(m_projectiles.begin() + i);
 		}
 	}
 }
@@ -180,6 +212,10 @@ void PlayState::draw() {
 		if (m_camera.isBoxInView(m_enemies[i]->getPosition(), tileDimensions)) {
 			m_enemies[i]->draw(m_spriteBatch);
 		}
+	}
+
+	for (unsigned int i = 0; i < m_projectiles.size(); i++) {
+		m_projectiles[i].draw(m_spriteBatch);
 	}
 
 	// End sprite batch creation

@@ -49,38 +49,3 @@ void Enemy::update(const std::vector<std::string>& levelData, Player* player, fl
 	// Do collision
 	collideWithLevel(levelData);
 }
-
-// Circular collision
-bool Enemy::collideWithEntity(Entity* entity) {
-
-	// Minimum distance before there is a collision
-	const float MIN_DISTANCE = ENEMY_RADIUS * 2.0f;
-
-	// Center position of this agent
-	glm::vec2 centerPosA = m_position + glm::vec2(ENEMY_RADIUS);
-	// Center position of the parameter agent
-	glm::vec2 centerPosB = entity->getPosition() + glm::vec2(ENEMY_RADIUS);
-
-	// Distance vector between the two agents
-	glm::vec2 distVec = centerPosA - centerPosB;
-
-	// Length of the distance vector
-	float distance = glm::length(distVec);
-
-	// Depth of the collision
-	float collisionDepth = MIN_DISTANCE - distance;
-
-	// If collision depth > 0 then we did collide
-	if (collisionDepth > 0) {
-
-		// Get the direction times the collision depth so we can push them away from each other
-		glm::vec2 collisionDepthVec = glm::normalize(distVec) * collisionDepth;
-
-		// Push them in opposite directions
-		m_position += collisionDepthVec / 2.0f;
-		entity->m_position -= collisionDepthVec / 2.0f;
-
-		return true;
-	}
-	return false;
-}

@@ -54,7 +54,12 @@ void Player::draw(GEngine::SpriteBatch& spriteBatch) {
 	*/
 }
 
-void Player::update(const std::vector<std::string>& levelData, float deltaTime) {
+void Player::update(const std::vector<std::string>& levelData, std::vector<Projectile>& projectiles, float deltaTime) {
+	// Shoot projectile
+	if (m_inputManager->isKeyPressed(SDL_BUTTON_LEFT)) {
+		shootProjectile(projectiles);
+	}
+
 	if (m_inputManager->isKeyDown(SDLK_w)) {
 		m_position.y += m_speed.y * deltaTime;
 	}
@@ -78,3 +83,8 @@ void Player::update(const std::vector<std::string>& levelData, float deltaTime) 
 	collideWithLevel(levelData);
 }
 
+void Player::shootProjectile(std::vector<Projectile>& projectiles) {
+	if (projectiles.size() < 10000) {
+		projectiles.emplace_back(16.0f, m_direction, m_position + glm::fvec2(32.0f));
+	}
+}

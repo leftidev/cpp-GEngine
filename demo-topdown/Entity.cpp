@@ -22,24 +22,39 @@ void Entity::draw(GEngine::SpriteBatch& spriteBatch) {
     spriteBatch.draw(destRect, uvRect, m_textureID, 0.0f, m_color, m_direction);
 }
 
-// AABB (Axis Aligned Bounding Box) collision
-bool Entity::collideWithEntity(int width, int height, Entity* entity) {
-    // The minimum distance before a collision occurs
-    const float MIN_DISTANCE_X = width / 2.0f + entity->width / 2.0f;
-    const float MIN_DISTANCE_Y = height / 2.0f + entity->height / 2.0f;
+// Circular collision
+bool Entity::collideWithEntity(Entity* entity) {
 
-    // Vector from center of agent to center of tile
-    glm::vec2 distVec = (m_position + glm::vec2(width / 2, height / 2)) - (entity->getPosition() + glm::vec2(entity->width / 2, entity->height / 2));
+	// Minimum distance before there is a collision
+	const float MIN_DISTANCE = 16.0f * 2.0f;
 
-    // Get the depth of the collision
-    float xDepth = MIN_DISTANCE_X - abs(distVec.x);
-    float yDepth = MIN_DISTANCE_Y - abs(distVec.y);
+	// Center position of this agent
+	glm::vec2 centerPosA = m_position + glm::vec2(16.0f);
+	// Center position of the parameter agent
+	glm::vec2 centerPosB = entity->getPosition() + glm::vec2(16.0f);
 
-    // If both the depths are > 0, then we collided
-    if (xDepth > 0 && yDepth > 0) {
-        return true;
-    }
-    return false;
+	// Distance vector between the two agents
+	glm::vec2 distVec = centerPosA - centerPosB;
+
+	// Length of the distance vector
+	float distance = glm::length(distVec);
+
+	// Depth of the collision
+	float collisionDepth = MIN_DISTANCE - distance;
+
+	// If collision depth > 0 then we did collide
+	if (collisionDepth > 0) {
+
+		// Get the direction times the collision depth so we can push them away from each other
+		glm::vec2 collisionDepthVec = glm::normalize(distVec) * collisionDepth;
+
+		// Push them in opposite directions
+		m_position += collisionDepthVec / 2.0f;
+		entity->m_position -= collisionDepthVec / 2.0f;
+
+		return true;
+	}
+	return false;
 }
 
 bool Entity::collideWithLevel(const std::vector<std::string>& levelData) {
@@ -143,4 +158,24 @@ void Entity::collideWithTile(glm::vec2 tilePos) {
 			}
 		}
 	}
+}
+
+// AABB (Axis Aligned Bounding Box) collision
+bool Entity::collideWithEnemy(int width, int height, Entity* entity) {
+	// The minimum distance before a collision occurs
+	const float MIN_DISTANCE_X = width / 2.0f + (entity->width / 2.0f) / 2.0f;
+	const float MIN_DISTANCE_Y = height / 2.0f + (entity->height / 2.0f) / 2.0f;
+
+	// Vector from center of agent to center of tile
+	glm::vec2 distVec = (m_position + glm::vec2(width / 2, height / 2)) - ((entity->getPosition() + glm::fvec2(16.0f)) + glm::vec2((entity->width / 2.0f) / 2, (entity->height / 2.0f) / 2));
+
+	// Get the depth of the collision
+	float xDepth = MIN_DISTANCE_X - abs(distVec.x);
+	float yDepth = MIN_DISTANCE_Y - abs(distVec.y);
+
+	// If both the depths are > 0, then we collided
+	if (xDepth > 0 && yDepth > 0) {
+		return true;
+	}
+	return false;
 }
