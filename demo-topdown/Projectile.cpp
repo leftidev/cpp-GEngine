@@ -11,8 +11,8 @@ Projectile::Projectile(float speed, glm::fvec2 direction, glm::vec2 pos) {
 
 	startPosition = pos;
 
-	width = 8.0f;
-	height = 8.0f;
+	width = 4.0f;
+	height = 4.0f;
 }
 
 Projectile::~Projectile() { }

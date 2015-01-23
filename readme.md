@@ -12,7 +12,7 @@ Demos:
 ------
 - demo-platformer: Basic 2D platformer demo
 - demo-spaceshooter: Basic 2D space shooter (read: Space Invaders) demo
-- demo-topdown: Basic 2D top-down shooter demo. NOTE: Under development
+- demo-topdown: Basic 2D top-down shooter demo
 
 TODO:
 -----
@@ -22,7 +22,7 @@ Other
 -----
 This project uses the MIT license. Feel free to poke.
 
-GEngine uses code from "Bengine". (The game engine created in Ben Arnold's YouTube Tutorial series "Advanced C++/Graphics Tutorials". Big thanks to him!)
+GEngine is based on "Bengine". (The game engine created by Ben Arnold in his YouTube Tutorial series "Advanced C++/Graphics Tutorials". Big thanks to him!)
 
 Screenshots
 -----------
